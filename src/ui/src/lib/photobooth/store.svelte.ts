@@ -7,7 +7,7 @@
  */
 import type { FrameId } from '../frames/types';
 import { FRAME_BY_ID } from '../frames/frames';
-import { initialBooth, type BoothSession } from './session';
+import { initialBooth, type BoothSession, type PhotoCapture } from './session';
 
 class PhotoboothStore {
 	session = $state<BoothSession>({ ...initialBooth });
@@ -18,6 +18,22 @@ class PhotoboothStore {
 
 	selectFrame(id: FrameId) {
 		this.session.frameId = id;
+	}
+
+	/** Append one captured still. */
+	addCapture(capture: PhotoCapture) {
+		this.session.captures = [...this.session.captures, capture];
+	}
+
+	/** Store the composed result and move to the result screen. */
+	setResult(url: string) {
+		this.session.resultUrl = url;
+		this.session.state = 'result';
+	}
+
+	setError(message: string) {
+		this.session.error = message;
+		this.session.state = 'error';
 	}
 
 	reset() {

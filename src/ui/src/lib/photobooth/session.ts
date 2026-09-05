@@ -37,6 +37,8 @@ export interface BoothSession {
 	captures: PhotoCapture[];
 	/** Composition stage countdown remaining seconds (5s between captures). */
 	countdown: number;
+	/** Data URL of the composed result, once composition finishes. */
+	resultUrl: string | null;
 	error: string | null;
 }
 
@@ -45,6 +47,7 @@ export const initialBooth: BoothSession = {
 	frameId: null,
 	captures: [],
 	countdown: 0,
+	resultUrl: null,
 	error: null
 };
 
