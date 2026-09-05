@@ -15,6 +15,9 @@ dependencies = [
     "pydantic-settings>=2.7",
     "pwdlib[argon2]>=0.2",
     "python-multipart>=0.0.20",
+    "pyjwt>=2.10",
+    "boto3>=1.35",
+    "alembic>=1.14",
 ]
 
 
@@ -23,6 +26,8 @@ dev = [
     "pytest>=8.3",
     "pytest-asyncio>=0.25",
     "httpx>=0.28",
+    "aioboto3>=13.1",
+    "pytest-mock>=3.14",
 ]
 
 [project.scripts]
