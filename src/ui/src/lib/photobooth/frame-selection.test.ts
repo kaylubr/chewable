@@ -16,13 +16,13 @@ describe('frame configuration', () => {
 		expect(getFrame('VINTAGE')).toBeUndefined();
 	});
 
-	it('defines the FILM frame with four photo slots on a 1620x2880 canvas', () => {
+	it('defines the FILM frame with four photo slots on a 564x1365 canvas', () => {
 		const film = getFrame('FILM');
 		expect(film?.name).toBe('35mm Film');
 		expect(film?.photoCount).toBe(4);
 		expect(film?.photoSlots).toHaveLength(4);
-		expect(film?.width).toBe(1620);
-		expect(film?.height).toBe(2880);
+		expect(film?.width).toBe(564);
+		expect(film?.height).toBe(1365);
 	});
 
 	it('keeps every photo slot inside the canvas bounds', () => {

@@ -63,11 +63,11 @@ describe('composePhoto', () => {
 		const { canvas, calls } = recordingCanvas();
 
 		const images = {
-			'/frames/test.png': fakePhoto(1620, 2880)
+			'/frames/classic.png': fakePhoto(564, 1365)
 		};
 		const photo = fakePhoto(800, 600);
 		const loadImage = (src: string) =>
-			Promise.resolve(src === frame.image ? images['/frames/test.png'] : photo);
+			Promise.resolve(src === frame.image ? images['/frames/classic.png'] : photo);
 
 		const dataUrl = await composePhoto(
 			frame,
@@ -86,12 +86,12 @@ describe('composePhoto', () => {
 		expect(draws).toHaveLength(5);
 
 		// Canvas dimensions come from the frame definition.
-		expect(canvas.width).toBe(1620);
-		expect(canvas.height).toBe(2880);
+		expect(canvas.width).toBe(564);
+		expect(canvas.height).toBe(1365);
 
 		// Last draw is the overlay image.
 		const last = draws[draws.length - 1].args;
-		expect(last[0]).toBe(images['/frames/test.png']);
+		expect(last[0]).toBe(images['/frames/classic.png']);
 	});
 
 	it('throws when captures are fewer than the frame requires', async () => {
@@ -104,12 +104,12 @@ describe('composePhoto', () => {
 	});
 
 	it('uses the slot rectangle as the draw destination', async () => {
-		const frame = getFrame('FILM')!;
-		const slot: PhotoSlot = frame.photoSlots[0];
-		const { canvas, calls } = recordingCanvas();
-		const photo = fakePhoto(800, 600);
-		const loadImage = (src: string) =>
-			Promise.resolve(src === frame.image ? fakePhoto(1620, 2880) : photo);
+	const frame = getFrame('FILM')!;
+	const slot: PhotoSlot = frame.photoSlots[0];
+	const { canvas, calls } = recordingCanvas();
+	const photo = fakePhoto(800, 600);
+	const loadImage = (src: string) =>
+		Promise.resolve(src === frame.image ? fakePhoto(564, 1365) : photo);
 
 		await composePhoto(
 			frame,

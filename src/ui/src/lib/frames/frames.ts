@@ -11,17 +11,18 @@ export const FRAMES: FrameDefinition[] = [
   {
     id: "FILM",
     name: "35mm Film",
-    image: "/frames/classic.jpg",
+    image: "/frames/classic.png",
     photoCount: 4,
-    width: 1620,
-    height: 2880,
+    width: 564,
+    height: 1365,
     photoSlots: [
-      // Measured white windows in the overlay: x 386-1233, y 187-782.
-      // Inset ~6px so photos stay cleanly inside each frame opening.
-      { x: 392, y: 193, width: 836, height: 584, rotation: 0 },
-      { x: 392, y: 829, width: 836, height: 584, rotation: 0 },
-      { x: 392, y: 1466, width: 836, height: 584, rotation: 0 },
-      { x: 392, y: 2127, width: 836, height: 584, rotation: 0 },
+      // Transparent windows in the overlay (classic.png): x 82-484, y bands
+      // 88-371 / 390-672 / 691-974 / 1005-1287. Inset 2px so photo edges
+      // sit under the frame's border line.
+      { x: 84, y: 90, width: 399, height: 280, rotation: 0 },
+      { x: 84, y: 392, width: 399, height: 279, rotation: 0 },
+      { x: 84, y: 693, width: 399, height: 280, rotation: 0 },
+      { x: 84, y: 1007, width: 399, height: 279, rotation: 0 },
     ],
   },
 ];
