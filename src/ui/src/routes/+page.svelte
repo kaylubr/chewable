@@ -1,9 +1,8 @@
 <script lang="ts">
-	// Landing page for Chewables photobooth.
 </script>
 
 <svelte:head>
-	<title>Chewables — Photobooth</title>
+	<title>Chewables</title>
 	<meta
 		name="description"
 		content="Chewables is a privacy-conscious photobooth. Pick a frame, take photos with your camera, and download the result — no account needed."
@@ -13,7 +12,6 @@
 <main class="landing">
 	<section class="hero">
 		<div class="hero-copy">
-			<p class="eyebrow">Expose · develop · keep</p>
 			<h1>
 				Four frames.<br />
 				One strip.<br />
@@ -36,7 +34,6 @@
 					height="726"
 				/>
 			</div>
-			<figcaption class="rebate">TX 5063 · 4 EXP · DEVELOPED IN-BROWSER</figcaption>
 		</figure>
 	</section>
 
@@ -91,6 +88,8 @@
 	:global(body) {
 		background: var(--paper);
 		color: var(--ink);
+		padding: 0;
+		margin: 0;
 	}
 	.landing {
 		font-family: var(--font-ui);
@@ -104,15 +103,6 @@
 		max-width: 72rem;
 		margin: 0 auto;
 		padding: 4.5rem 1.5rem 5rem;
-	}
-	.eyebrow {
-		font-family: var(--font-mono);
-		text-transform: uppercase;
-		letter-spacing: 0.18em;
-		font-size: 0.72rem;
-		font-weight: 600;
-		color: var(--ember-ink);
-		margin: 0 0 1.25rem;
 	}
 	h1 {
 		font-family: 'Fraunces Variable', Georgia, serif;
@@ -158,15 +148,6 @@
 		border-radius: 0.35rem;
 		max-width: 100%;
 		height: auto;
-	}
-	.rebate {
-		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		letter-spacing: 0.14em;
-		color: var(--ink-faint);
-		text-transform: uppercase;
-		text-align: center;
-		overflow-wrap: break-word;
 	}
 	.process {
 		max-width: 72rem;

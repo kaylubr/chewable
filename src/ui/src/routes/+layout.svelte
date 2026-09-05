@@ -18,7 +18,6 @@
 
 <header class="nav">
 	<a href="/" class="brand">
-		<span class="sprocket" aria-hidden="true"></span>
 		Chewables
 	</a>
 	<nav>
@@ -157,15 +156,6 @@
 	}
 	.brand:hover {
 		color: var(--ember-deep);
-	}
-	.sprocket {
-		width: 1.1rem;
-		height: 1.1rem;
-		border-radius: 50%;
-		background: radial-gradient(circle, var(--ember) 0 38%, transparent 42%);
-		border: 1px solid var(--ember-deep);
-		box-shadow: inset 0 0 0 2px var(--paper);
-		flex: none;
 	}
 	nav {
 		display: flex;
