@@ -156,6 +156,8 @@
 	.strip-frame img {
 		display: block;
 		border-radius: 0.35rem;
+		max-width: 100%;
+		height: auto;
 	}
 	.rebate {
 		font-family: var(--font-mono);
@@ -163,6 +165,8 @@
 		letter-spacing: 0.14em;
 		color: var(--ink-faint);
 		text-transform: uppercase;
+		text-align: center;
+		overflow-wrap: break-word;
 	}
 	.process {
 		max-width: 72rem;

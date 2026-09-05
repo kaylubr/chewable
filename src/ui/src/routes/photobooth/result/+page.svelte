@@ -156,4 +156,25 @@
 		margin-top: 1rem;
 		font-size: var(--text-sm);
 	}
+	/* Phone: stack the actions full-width under the photo. */
+	@media (max-width: 480px) {
+		.actions {
+			flex-direction: column;
+			gap: 0.6rem;
+			max-width: 24rem;
+			margin-inline: auto;
+		}
+		.actions button {
+			width: 100%;
+			padding-block: 0.85rem;
+		}
+	}
+	/* Touch: keep the save/download targets thumb-sized. */
+	@media (pointer: coarse) {
+		.primary,
+		.secondary,
+		.ghost {
+			min-height: 48px;
+		}
+	}
 </style>

@@ -139,7 +139,8 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0.9rem 1.5rem;
+		gap: 1rem;
+		padding: calc(0.9rem + env(safe-area-inset-top)) 1.5rem 0.9rem;
 		max-width: 72rem;
 		margin: 0 auto;
 	}
@@ -164,10 +165,11 @@
 		background: radial-gradient(circle, var(--ember) 0 38%, transparent 42%);
 		border: 1px solid var(--ember-deep);
 		box-shadow: inset 0 0 0 2px var(--paper);
+		flex: none;
 	}
 	nav {
 		display: flex;
-		gap: 1.1rem;
+		gap: 0.5rem;
 		align-items: center;
 	}
 	nav a,
@@ -178,12 +180,37 @@
 		font-size: 0.95rem;
 		background: none;
 		border: none;
-		padding: 0;
+		padding: 0.5rem 0.6rem;
 		cursor: pointer;
 		font-family: inherit;
+		border-radius: 0.375rem;
 	}
 	nav a:hover,
 	.link:hover {
 		color: var(--ember-deep);
+	}
+	/* Narrow screens: keep the nav on one line, tighten the wordmark gap. */
+	@media (max-width: 520px) {
+		.nav {
+			padding-inline: 1rem;
+		}
+		.brand {
+			font-size: 1.15rem;
+		}
+		nav a,
+		.link {
+			font-size: 0.9rem;
+			padding: 0.5rem 0.4rem;
+		}
+	}
+	/* Touch: generous tap targets on coarse pointers. */
+	@media (pointer: coarse) {
+		nav a,
+		.link {
+			padding-block: 0.65rem;
+			min-height: 44px;
+			display: inline-flex;
+			align-items: center;
+		}
 	}
 </style>

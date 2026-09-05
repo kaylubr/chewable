@@ -126,4 +126,14 @@
 		font-size: 0.95rem;
 		color: var(--ink-soft);
 	}
+	/* Touch: inputs and the submit need thumb-sized targets. */
+	@media (pointer: coarse) {
+		input {
+			padding-block: 0.8rem;
+			font-size: 1rem; /* keeps >=16px on iOS regardless of class */
+		}
+		.primary {
+			min-height: 48px;
+		}
+	}
 </style>

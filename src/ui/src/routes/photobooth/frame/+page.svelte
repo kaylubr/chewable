@@ -41,8 +41,10 @@
 				onclick={() => choose(frame.id)}
 			>
 				<img src={frame.image} alt={`${frame.name} frame preview`} width="220" />
-				<span class="name">{frame.name}</span>
-				<span class="count">{frame.photoCount} photos</span>
+				<span class="card-meta">
+					<span class="name">{frame.name}</span>
+					<span class="count">{frame.photoCount} photos</span>
+				</span>
 			</button>
 		{/each}
 	</div>
@@ -127,5 +129,40 @@
 		font-size: var(--text-base);
 		font-weight: 600;
 		cursor: pointer;
+	}
+	/* Narrow phones: one frame per row, image height capped so the tall
+	   film strip does not dominate the card. */
+	@media (max-width: 480px) {
+		.grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+		.frame-card {
+			flex-direction: row;
+			justify-content: flex-start;
+			text-align: left;
+			gap: 1rem;
+			padding: 0.9rem;
+		}
+		.frame-card img {
+			max-height: 140px;
+			max-width: 38%;
+			flex: none;
+		}
+		.frame-card .card-meta {
+			display: flex;
+			flex-direction: column;
+			gap: 0.35rem;
+		}
+		.actions {
+			flex-wrap: wrap;
+		}
+	}
+	/* Touch: whole card is already the target; give actions height. */
+	@media (pointer: coarse) {
+		.primary {
+			min-height: 48px;
+			padding-inline: 1.6rem;
+		}
 	}
 </style>

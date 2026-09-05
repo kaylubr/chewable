@@ -369,4 +369,47 @@
 		border-color: var(--ink-faint);
 		color: var(--ink);
 	}
+	/* Narrow phones: give the camera the screen, scale the countdown down. */
+	@media (max-width: 560px) {
+		.camera-page {
+			padding-inline: 0;
+		}
+		.camera-page h1 {
+			padding-inline: 1rem;
+		}
+		.camera-page .sub {
+			padding-inline: 1rem;
+		}
+		.video-wrap {
+			border-radius: 0;
+			max-width: none;
+		}
+		.countdown {
+			font-size: clamp(4rem, 24vw, 6rem);
+		}
+		.big-start {
+			font-size: 1.2rem;
+			padding: 1rem 2.4rem;
+		}
+	}
+	/* Touch: bigger targets, primary actions thumb-reachable. */
+	@media (pointer: coarse) {
+		.primary,
+		.ghost,
+		.big-start {
+			min-height: 48px;
+		}
+		.progress {
+			gap: 0.65rem;
+			padding-block: 0.25rem;
+		}
+		.dot {
+			width: 0.85rem;
+			height: 0.85rem;
+		}
+	}
+	/* Add breathing room above the bottom-safe-area for the action row. */
+	.actions {
+		padding-bottom: env(safe-area-inset-bottom);
+	}
 </style>
