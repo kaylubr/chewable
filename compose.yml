@@ -1,0 +1,16 @@
+name: chewable
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: chewables
+      POSTGRES_PASSWORD: chewables
+      POSTGRES_DB: chewables
+    ports:
+      - "5434:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
