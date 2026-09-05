@@ -78,10 +78,14 @@ export function createCaptureController(
 		// Countdown reached zero — take the shot.
 		clearTimer();
 		countdown = COUNTDOWN_SECONDS;
+		void takeShot();
+	}
+
+	async function takeShot() {
 		onState('capturing');
 		let dataUrl: string;
 		try {
-			dataUrl = deps.snap();
+			dataUrl = await deps.snap();
 		} catch {
 			active = false;
 			onState('error');

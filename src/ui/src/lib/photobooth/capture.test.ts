@@ -29,28 +29,22 @@ describe('capture controller', () => {
 		return { controller, shots, states };
 	}
 
-	function advanceSeconds(controller: { start(): void }, seconds: number) {
-		controller.start();
-		vi.advanceTimersByTime(seconds * 1000);
-	}
-
-	it('captures exactly photoCount images with a countdown before each', () => {
+	it('captures exactly photoCount images with a countdown before each', async () => {
 		const { controller, shots, states } = makeController(2);
 		controller.start();
 		expect(states[0]).toBe('countdown');
 		// 5s countdown then first capture
-		vi.advanceTimersByTime(COUNTDOWN_SECONDS * 1000);
+		await vi.advanceTimersByTimeAsync(COUNTDOWN_SECONDS * 1000);
 		expect(shots).toHaveLength(1);
 		expect(states).toContain('capturing');
 		// second countdown then second capture -> composing
-		vi.advanceTimersByTime(COUNTDOWN_SECONDS * 1000);
+		await vi.advanceTimersByTimeAsync(COUNTDOWN_SECONDS * 1000);
 		expect(shots).toHaveLength(2);
 		expect(controller.done).toBe(true);
 		expect(states[states.length - 1]).toBe('composing');
 	});
 
-	it('records each capture index in order', () => {
-		const { controller } = makeController(3);
+	it('records each capture index in order', async () => {
 		const indices: number[] = [];
 		const frame = makeFrame(3);
 		createCaptureController(
@@ -59,35 +53,35 @@ describe('capture controller', () => {
 			(c) => indices.push(c.index),
 			() => {}
 		).start();
-		vi.advanceTimersByTime(COUNTDOWN_SECONDS * 1000);
+		await vi.advanceTimersByTimeAsync(COUNTDOWN_SECONDS * 1000);
 		expect(indices).toEqual([0]);
 	});
 
-	it('start is idempotent while active', () => {
+	it('start is idempotent while active', async () => {
 		const { controller, shots } = makeController(2);
 		controller.start();
 		controller.start();
 		controller.start();
-		vi.advanceTimersByTime(COUNTDOWN_SECONDS * 1000);
+		await vi.advanceTimersByTimeAsync(COUNTDOWN_SECONDS * 1000);
 		expect(shots).toHaveLength(1);
 	});
 
-	it('snap failure surfaces an error and stops', () => {
+	it('snap failure surfaces an error and stops', async () => {
 		const { controller, states } = makeController(1, () => {
 			throw new Error('camera died');
 		});
 		controller.start();
-		vi.advanceTimersByTime(COUNTDOWN_SECONDS * 1000);
+		await vi.advanceTimersByTimeAsync(COUNTDOWN_SECONDS * 1000);
 		expect(states).toContain('error');
 		expect(controller.done).toBe(false);
 	});
 
-	it('abort stops the run without further shots', () => {
+	it('abort stops the run without further shots', async () => {
 		const { controller, shots } = makeController(3);
 		controller.start();
-		vi.advanceTimersByTime(2000);
+		await vi.advanceTimersByTimeAsync(2000);
 		controller.abort();
-		vi.advanceTimersByTime(COUNTDOWN_SECONDS * 1000);
+		await vi.advanceTimersByTimeAsync(COUNTDOWN_SECONDS * 1000);
 		expect(shots).toHaveLength(0);
 		expect(controller.done).toBe(true);
 	});

@@ -47,8 +47,7 @@ describe('composePhoto', () => {
 			restore: () => calls.push({ op: 'restore', args: [] }),
 			translate: (...a: unknown[]) => calls.push({ op: 'translate', args: a }),
 			rotate: (...a: unknown[]) => calls.push({ op: 'rotate', args: a }),
-			drawImage: (...a: unknown[]) => calls.push({ op: 'drawImage', args: a }),
-			canvas: null
+			drawImage: (...a: unknown[]) => calls.push({ op: 'drawImage', args: a })
 		} as unknown as CanvasRenderingContext2D;
 		const canvas = {
 			width: 0,
@@ -56,7 +55,6 @@ describe('composePhoto', () => {
 			getContext: () => ctx,
 			toDataURL: () => 'data:image/webp;base64,composed'
 		} as unknown as HTMLCanvasElement;
-		ctx.canvas = canvas;
 		return { canvas, calls };
 	}
 
