@@ -40,13 +40,93 @@
 		outline-offset: 2px;
 	}
 	:global(html) {
-		--ink: #1c1917;
-		--paper: #faf7f2;
-		--ember: #b45309;
-		--ember-deep: #92400e;
-		--warm-gray: #57534e;
-		--line: #e7e5e4;
-		--wash: #f5f2ec;
+		/*
+		 * Color roles (OKLCH). Neutrals carry a warm cast toward the brand
+		 * hue so surfaces feel related to the film-strip material. The amber
+		 * accent is deliberately rare: it marks the exposure moment only.
+		 *
+		 * Hue 55 is a warm, slightly ochre amber; the dark "developer" tones
+		 * live at the same hue with near-zero chroma.
+		 */
+		--paper: oklch(0.97 0.012 75); /* page canvas, warm off-white */
+		--surface: oklch(0.99 0.006 75); /* cards, raised panels */
+		--surface-2: oklch(0.955 0.014 75); /* wash, inset fills */
+		--ink: oklch(0.28 0.03 55); /* body text */
+		--ink-soft: oklch(0.43 0.035 55); /* secondary text */
+		--ink-faint: oklch(0.6 0.03 55); /* captions, placeholders */
+		--line: oklch(0.9 0.018 75); /* hairline borders */
+		--line-strong: oklch(0.83 0.03 70); /* hover/strong borders */
+
+		/* Brand — the exposure accent. Used for the one primary action,
+		   selection, focus, and progress. Never spread flat across surfaces. */
+		--ember: oklch(0.62 0.15 55); /* primary action, selection */
+		--ember-deep: oklch(0.52 0.13 50); /* hover/pressed, rebate text */
+		--ember-ink: oklch(0.45 0.12 50); /* amber text on light (AA) */
+
+		/* Dark "developer" surface — completion/relief, privacy section. */
+		--dev-bg: oklch(0.2 0.018 60); /* warm near-black */
+		--dev-bg-raise: oklch(0.24 0.02 60); /* raised card on dark */
+		--dev-ink: oklch(0.92 0.02 75); /* primary text on dark */
+		--dev-ink-soft: oklch(0.78 0.025 70); /* secondary text on dark */
+		--dev-line: oklch(0.32 0.02 60); /* borders on dark */
+
+		/* States — never the only signal; always paired with shape/label. */
+		--danger: oklch(0.55 0.19 30); /* destructive text/icon */
+		--danger-bg: oklch(0.95 0.03 30); /* destructive wash */
+		--danger-line: oklch(0.88 0.06 30); /* destructive border */
+		--success: oklch(0.52 0.12 150);
+		--focus: oklch(0.62 0.15 55); /* same as ember, visible ring */
+
+		/* Type families */
+		--font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+		--font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+		--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+		/* Type scale (major-third-ish, tuned for 16px body) */
+		--text-xs: 0.75rem;
+		--text-sm: 0.875rem;
+		--text-base: 1rem;
+		--text-lg: 1.125rem;
+		--text-xl: 1.375rem;
+		--text-2xl: 1.75rem;
+		--text-3xl: 2.25rem;
+
+		font-family: var(--font-ui);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
+	}
+	:global(body) {
+		font-size: var(--text-base);
+		line-height: 1.6;
+		color: var(--ink);
+		background: var(--paper);
+	}
+	:global(h1, h2, h3) {
+		font-family: var(--font-display);
+		font-optical-sizing: auto;
+		text-wrap: balance;
+		color: var(--ink);
+	}
+	:global(p) {
+		text-wrap: pretty;
+	}
+	:global(input, textarea) {
+		font: inherit;
+	}
+	:global(button) {
+		font-family: var(--font-ui);
+	}
+	:global(::selection) {
+		background: color-mix(in oklch, var(--ember) 22%, transparent);
+	}
+	:global(a) {
+		color: var(--ember-ink);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 2px;
+	}
+	:global(a:hover) {
+		color: var(--ember-deep);
 	}
 	@media (prefers-reduced-motion: reduce) {
 		:global(*) {
@@ -67,7 +147,7 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 0.55rem;
-		font-family: 'Fraunces Variable', Georgia, serif;
+		font-family: var(--font-display);
 		font-weight: 750;
 		font-size: 1.3rem;
 		letter-spacing: -0.01em;
@@ -90,24 +170,19 @@
 		gap: 1.1rem;
 		align-items: center;
 	}
-	nav a {
-		color: var(--ink);
+	nav a,
+	.link {
+		color: var(--ink-soft);
 		text-decoration: none;
 		font-weight: 500;
 		font-size: 0.95rem;
-	}
-	nav a:hover {
-		color: var(--ember-deep);
-	}
-	.link {
 		background: none;
 		border: none;
-		color: var(--ink);
-		font-weight: 500;
+		padding: 0;
 		cursor: pointer;
-		font-size: 0.95rem;
 		font-family: inherit;
 	}
+	nav a:hover,
 	.link:hover {
 		color: var(--ember-deep);
 	}

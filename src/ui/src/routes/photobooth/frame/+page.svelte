@@ -60,11 +60,11 @@
 		max-width: 60rem;
 		margin: 0 auto;
 		padding: 3rem 1.5rem;
-		font-family: system-ui, sans-serif;
-		color: #1c1917;
+		font-family: var(--font-ui);
+		color: var(--ink);
 	}
 	.sub {
-		color: #57534e;
+		color: var(--ink-soft);
 		margin-top: -0.5rem;
 	}
 	.grid {
@@ -74,9 +74,9 @@
 		margin: 2rem 0;
 	}
 	.frame-card {
-		border: 2px solid #e7e5e4;
+		border: 2px solid var(--line);
 		border-radius: 0.75rem;
-		background: #fff;
+		background: var(--surface);
 		padding: 1rem;
 		cursor: pointer;
 		display: flex;
@@ -86,11 +86,11 @@
 		transition: border-color 0.15s, box-shadow 0.15s;
 	}
 	.frame-card:hover {
-		border-color: #d6d3d1;
+		border-color: var(--line-strong);
 	}
 	.frame-card.selected {
-		border-color: #b45309;
-		box-shadow: 0 0 0 3px rgb(180 83 9 / 0.25);
+		border-color: var(--ember);
+		box-shadow: 0 0 0 3px color-mix(in oklch, var(--ember) 25%, transparent);
 	}
 	.frame-card img {
 		border-radius: 0.35rem;
@@ -98,14 +98,19 @@
 		object-fit: contain;
 	}
 	.name {
-		font-weight: 600;
+		font-family: var(--font-display);
+		font-weight: 640;
+		font-size: var(--text-lg);
 	}
 	.count {
-		font-size: 0.85rem;
-		color: #78716c;
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--ink-faint);
 	}
 	.error {
-		color: #b91c1c;
+		color: var(--danger);
 		font-weight: 600;
 	}
 	.actions {
@@ -114,12 +119,12 @@
 		align-items: center;
 	}
 	.primary {
-		background: #b45309;
+		background: var(--ember);
 		color: #fff;
 		border: none;
 		border-radius: 0.5rem;
 		padding: 0.7rem 1.4rem;
-		font-size: 1rem;
+		font-size: var(--text-base);
 		font-weight: 600;
 		cursor: pointer;
 	}

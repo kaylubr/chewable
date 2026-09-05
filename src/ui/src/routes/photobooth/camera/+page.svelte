@@ -131,10 +131,10 @@
 </svelte:head>
 
 <main class="camera-page">
-	<h1>Smile! 📸</h1>
+	<h1>Four shots, five seconds apart</h1>
 	{#if frame}
 		<p class="sub">
-			{frame.name} needs {frame.photoCount} photos — one every few seconds.
+			{frame.name} needs {frame.photoCount} photos. Watch the countdown and hold still.
 		</p>
 	{/if}
 
@@ -207,16 +207,19 @@
 		max-width: 44rem;
 		margin: 0 auto;
 		padding: 2rem 1.5rem;
-		font-family: system-ui, sans-serif;
-		color: #1c1917;
+		font-family: var(--font-ui);
+		color: var(--ink);
 		text-align: center;
 	}
 	h1 {
 		margin-bottom: 0.25rem;
+		font-weight: 620;
 	}
 	.sub {
-		color: #57534e;
+		color: var(--ink-soft);
 		margin-top: 0;
+		max-width: 40ch;
+		margin-inline: auto;
 	}
 	.stage {
 		margin-top: 1.5rem;
@@ -224,7 +227,7 @@
 	.video-wrap {
 		position: relative;
 		aspect-ratio: 4 / 3;
-		background: #111;
+		background: var(--dev-bg);
 		border-radius: 1rem;
 		overflow: hidden;
 		max-width: 640px;
@@ -241,40 +244,46 @@
 		margin: auto;
 		width: fit-content;
 		height: fit-content;
-		color: #fff;
-		background: rgb(0 0 0 / 0.6);
+		color: var(--dev-ink);
+		background: color-mix(in oklch, var(--dev-bg) 70%, transparent);
 		padding: 0.5rem 1rem;
 		border-radius: 0.5rem;
+		font-size: var(--text-sm);
+		letter-spacing: 0.04em;
 	}
 	.big-start {
 		position: absolute;
 		left: 50%;
 		top: 50%;
 		transform: translate(-50%, -50%);
-		background: #b45309;
+		background: var(--ember);
 		color: #fff;
 		border: none;
 		font-size: 1.1rem;
-		font-weight: 700;
+		font-weight: 650;
 		padding: 0.9rem 1.8rem;
 		border-radius: 999px;
 		cursor: pointer;
-		box-shadow: 0 4px 20px rgb(0 0 0 / 0.35);
+		box-shadow: 0 4px 20px oklch(0.2 0.018 60 / 0.4);
 	}
 	.countdown {
 		position: absolute;
 		inset: 0;
 		display: grid;
 		place-items: center;
+		font-family: var(--font-mono);
 		font-size: 6rem;
-		font-weight: 800;
-		color: #fff;
-		text-shadow: 0 2px 20px rgb(0 0 0 / 0.7);
+		font-weight: 700;
+		line-height: 1;
+		font-variant-numeric: tabular-nums;
+		letter-spacing: -0.02em;
+		color: var(--dev-ink);
+		text-shadow: 0 2px 20px oklch(0.2 0.018 60 / 0.7);
 	}
 	.flash {
 		position: absolute;
 		inset: 0;
-		background: white;
+		background: oklch(0.97 0.012 75);
 		opacity: 0.7;
 		animation: fade 0.3s ease-out forwards;
 		pointer-events: none;
@@ -298,14 +307,16 @@
 		width: 0.7rem;
 		height: 0.7rem;
 		border-radius: 50%;
-		background: #e7e5e4;
+		background: var(--line);
 	}
 	.dot.filled {
-		background: #b45309;
+		background: var(--ember);
 	}
 	.count {
 		margin-left: 0.5rem;
-		color: #78716c;
+		color: var(--ink-soft);
+		font-family: var(--font-mono);
+		font-size: var(--text-sm);
 		font-variant-numeric: tabular-nums;
 	}
 	.actions {
@@ -315,17 +326,18 @@
 		max-width: 480px;
 		margin: 2rem auto;
 		padding: 1.5rem;
-		background: #fef2f2;
-		border: 1px solid #fecaca;
+		background: var(--danger-bg);
+		border: 1px solid var(--danger-line);
 		border-radius: 0.75rem;
 	}
 	.error-title {
-		color: #991b1b;
+		color: var(--danger);
 		font-weight: 600;
 	}
 	.error-hint {
-		color: #7f1d1d;
-		font-size: 0.9rem;
+		color: var(--danger);
+		font-size: var(--text-sm);
+		opacity: 0.85;
 	}
 	.row {
 		display: flex;
@@ -334,7 +346,7 @@
 		margin-top: 1rem;
 	}
 	.primary {
-		background: #b45309;
+		background: var(--ember);
 		color: white;
 		border: none;
 		border-radius: 0.5rem;
@@ -342,12 +354,19 @@
 		font-weight: 600;
 		cursor: pointer;
 	}
+	.primary:hover {
+		background: var(--ember-deep);
+	}
 	.ghost {
 		background: transparent;
-		border: 1px solid #d6d3d1;
-		color: #44403c;
+		border: 1px solid var(--line-strong);
+		color: var(--ink-soft);
 		border-radius: 0.5rem;
 		padding: 0.6rem 1.2rem;
 		cursor: pointer;
+	}
+	.ghost:hover {
+		border-color: var(--ink-faint);
+		color: var(--ink);
 	}
 </style>

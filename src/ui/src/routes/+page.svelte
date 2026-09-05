@@ -93,7 +93,7 @@
 		color: var(--ink);
 	}
 	.landing {
-		font-family: system-ui, sans-serif;
+		font-family: var(--font-ui);
 		color: var(--ink);
 	}
 	.hero {
@@ -106,12 +106,12 @@
 		padding: 4.5rem 1.5rem 5rem;
 	}
 	.eyebrow {
-		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-family: var(--font-mono);
 		text-transform: uppercase;
 		letter-spacing: 0.18em;
 		font-size: 0.72rem;
 		font-weight: 600;
-		color: var(--ember-deep);
+		color: var(--ember-ink);
 		margin: 0 0 1.25rem;
 	}
 	h1 {
@@ -125,7 +125,7 @@
 	.lede {
 		font-size: 1.15rem;
 		line-height: 1.6;
-		color: var(--warm-gray);
+		color: var(--ink-soft);
 		max-width: 34rem;
 		margin: 0 0 2rem;
 	}
@@ -151,17 +151,17 @@
 		gap: 0.75rem;
 	}
 	.strip-frame {
-		filter: drop-shadow(0 24px 40px rgb(28 25 23 / 0.28));
+		filter: drop-shadow(0 24px 40px oklch(0.28 0.03 55 / 0.3));
 	}
 	.strip-frame img {
 		display: block;
 		border-radius: 0.35rem;
 	}
 	.rebate {
-		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-family: var(--font-mono);
 		font-size: 0.68rem;
 		letter-spacing: 0.14em;
-		color: var(--warm-gray);
+		color: var(--ink-faint);
 		text-transform: uppercase;
 	}
 	.process {
@@ -186,27 +186,27 @@
 		gap: 2.5rem;
 	}
 	.step-no {
-		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-family: var(--font-mono);
 		font-size: 0.75rem;
-		color: var(--ember-deep);
+		color: var(--ember-ink);
 		letter-spacing: 0.1em;
 	}
 	.steps h3 {
-		font-family: 'Fraunces Variable', Georgia, serif;
+		font-family: var(--font-display);
 		font-weight: 640;
 		font-size: 1.3rem;
 		margin: 0.5rem 0 0.4rem;
 	}
 	.steps p {
 		margin: 0;
-		color: var(--warm-gray);
+		color: var(--ink-soft);
 		font-size: 0.98rem;
 		line-height: 1.55;
 		max-width: 30ch;
 	}
 	.privacy {
-		background: #14100c;
-		color: #f5f1ea;
+		background: var(--dev-bg);
+		color: var(--dev-ink);
 		padding: 5rem 1.5rem;
 	}
 	.privacy-inner {
@@ -214,7 +214,7 @@
 		margin: 0 auto;
 	}
 	.privacy .section-title {
-		color: #f5f1ea;
+		color: var(--dev-ink);
 	}
 	.privacy ul {
 		margin: 0 0 1.5rem;
@@ -225,18 +225,18 @@
 	}
 	.privacy li {
 		padding: 1.1rem 1.3rem;
-		background: rgb(255 255 255 / 0.04);
-		border: 1px solid rgb(255 255 255 / 0.09);
+		background: var(--dev-bg-raise);
+		border: 1px solid var(--dev-line);
 		border-radius: 0.5rem;
 		line-height: 1.5;
 	}
 	.privacy li strong {
-		color: #fff;
+		color: var(--dev-ink);
 	}
 	.privacy-note {
 		font-size: 0.9rem;
-		color: #b7aea3;
-		border-top: 1px solid rgb(255 255 255 / 0.12);
+		color: var(--dev-ink-soft);
+		border-top: 1px solid var(--dev-line);
 		padding-top: 1.25rem;
 		margin: 0;
 		max-width: 52ch;

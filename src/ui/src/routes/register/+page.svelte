@@ -71,11 +71,14 @@
 		max-width: 24rem;
 		margin: 0 auto;
 		padding: 3rem 1.5rem;
-		font-family: system-ui, sans-serif;
-		color: #1c1917;
+		font-family: var(--font-ui);
+		color: var(--ink);
+	}
+	.auth-page h1 {
+		font-weight: 640;
 	}
 	.sub {
-		color: #57534e;
+		color: var(--ink-soft);
 		margin-top: -0.5rem;
 	}
 	form {
@@ -87,29 +90,40 @@
 		display: grid;
 		gap: 0.35rem;
 		font-weight: 600;
+		font-size: var(--text-sm);
 	}
 	input {
 		padding: 0.6rem 0.75rem;
-		border: 1px solid #d6d3d1;
+		border: 1px solid var(--line-strong);
 		border-radius: 0.5rem;
-		font-size: 1rem;
+		font-size: var(--text-base);
+		font-weight: 400;
+		background: var(--surface);
+		color: var(--ink);
+	}
+	input:focus {
+		border-color: var(--ember);
 	}
 	.error {
-		color: #991b1b;
-		background: #fef2f2;
-		border: 1px solid #fecaca;
+		color: var(--danger);
+		background: var(--danger-bg);
+		border: 1px solid var(--danger-line);
 		padding: 0.6rem 0.75rem;
 		border-radius: 0.5rem;
+		font-size: var(--text-sm);
 	}
 	.primary {
-		background: #b45309;
+		background: var(--ember);
 		color: white;
 		border: none;
 		border-radius: 0.5rem;
 		padding: 0.75rem;
-		font-weight: 700;
-		font-size: 1rem;
+		font-weight: 650;
+		font-size: var(--text-base);
 		cursor: pointer;
+	}
+	.primary:hover {
+		background: var(--ember-deep);
 	}
 	.primary:disabled {
 		opacity: 0.6;
@@ -117,5 +131,6 @@
 	.alt {
 		margin-top: 1.25rem;
 		font-size: 0.95rem;
+		color: var(--ink-soft);
 	}
 </style>

@@ -91,14 +91,17 @@
 		max-width: 40rem;
 		margin: 0 auto;
 		padding: 2rem 1.5rem;
-		font-family: system-ui, sans-serif;
-		color: #1c1917;
+		font-family: var(--font-ui);
+		color: var(--ink);
 		text-align: center;
+	}
+	.result-page h1 {
+		font-weight: 620;
 	}
 	.result {
 		max-width: min(360px, 100%);
 		border-radius: 0.5rem;
-		box-shadow: 0 8px 30px rgb(0 0 0 / 0.2);
+		box-shadow: 0 8px 30px oklch(0.28 0.03 55 / 0.22);
 		margin: 1.5rem auto;
 		display: block;
 	}
@@ -116,29 +119,41 @@
 		font-weight: 600;
 		cursor: pointer;
 		border: none;
+		font-size: var(--text-base);
 	}
 	.primary {
-		background: #b45309;
+		background: var(--ember);
 		color: white;
 	}
+	.primary:hover {
+		background: var(--ember-deep);
+	}
 	.secondary {
-		background: #1c1917;
-		color: white;
+		background: var(--dev-bg);
+		color: var(--dev-ink);
+	}
+	.secondary:hover {
+		background: var(--dev-bg-raise);
 	}
 	.ghost {
 		background: transparent;
-		color: #44403c;
-		border: 1px solid #d6d3d1;
+		color: var(--ink-soft);
+		border: 1px solid var(--line-strong);
+	}
+	.ghost:hover {
+		border-color: var(--ink-faint);
+		color: var(--ink);
 	}
 	.empty {
-		color: #57534e;
+		color: var(--ink-soft);
 	}
 	.save-error {
-		color: #991b1b;
-		background: #fef2f2;
-		border: 1px solid #fecaca;
+		color: var(--danger);
+		background: var(--danger-bg);
+		border: 1px solid var(--danger-line);
 		padding: 0.6rem 0.75rem;
 		border-radius: 0.5rem;
 		margin-top: 1rem;
+		font-size: var(--text-sm);
 	}
 </style>
