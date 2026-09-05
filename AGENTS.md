@@ -14,6 +14,7 @@ A privacy-conscious photobooth web app. Guests use the full experience (frame se
 - Frontend frame logic lives in one centralized `FrameDefinition` config — capture logic only needs `photoCount`; composition reads the full definition.
 - Never trust a client-supplied user ID — the server always derives the current user from the auth mechanism.
 - Git commits are atomic: one logical change per commit. No "update backend" / "fix stuff".
+- Commit messages are plain: no `Co-authored-by` or other attribution trailers appended by the assistant, normal commits only.
 
 ## Architecture Notes
 
