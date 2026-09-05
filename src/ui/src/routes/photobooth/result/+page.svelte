@@ -57,35 +57,33 @@
 </svelte:head>
 
 <main class="result-page">
-	<h1>Here's your photo!</h1>
-
 	{#if resultUrl}
+		<h1>Here's your photo!</h1>
 		<img
 			class="result"
 			src={resultUrl}
 			alt={frame ? `Your finished ${frame.name.toLowerCase()} photobooth result` : 'Your finished photobooth result'}
 			width="360"
 		/>
+		<div class="actions">
+			<button type="button" class="primary" onclick={download}>Download</button>
+			<button type="button" class="secondary" onclick={() => void save()} disabled={saving}>
+				{#if saving}
+					Saving…
+				{:else if auth.isAuthenticated}
+					Save to my photos
+				{:else}
+					Save to account
+				{/if}
+			</button>
+			<button type="button" class="ghost" onclick={startOver}>Take another</button>
+		</div>
 	{:else}
 		<p class="empty">No finished photo in this session.</p>
-		<button type="button" onclick={startOver}>Start over</button>
+		<button type="button" class="secondary" onclick={startOver}>Start over</button>
 	{/if}
 
 	{#if saveError}<p class="save-error" role="alert">{saveError}</p>{/if}
-
-	<div class="actions">
-		<button type="button" class="primary" onclick={download}>Download</button>
-		<button type="button" class="secondary" onclick={() => void save()} disabled={saving}>
-			{#if saving}
-				Saving…
-			{:else if auth.isAuthenticated}
-				Save to my photos
-			{:else}
-				Save to account
-			{/if}
-		</button>
-		<button type="button" class="ghost" onclick={startOver}>Take another</button>
-	</div>
 </main>
 
 <style>
