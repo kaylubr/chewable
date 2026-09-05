@@ -5,14 +5,14 @@ A privacy-conscious photobooth web app. Guests use the full experience (frame se
 
 **Stack:** SvelteKit + TypeScript (frontend), FastAPI + Python (backend), PostgreSQL via Docker Compose (dev), object storage for saved images.
 
-See @README.md for setup and @package.json / @backend/requirements.txt for dependencies.
+See @README.md for setup and src/ui/package.json & pyproject.toml for dependencies.
 
 ## Code Style Guidelines
 - One purpose per file, no giant `utils.py` or catch-all modules.
 - `main.py` is wiring only (app creation, routers, middleware, CORS, exception handlers) — never endpoint logic.
 - Routes stay thin: validate input → authenticate/authorize → call service → return response. No DB or storage internals in route functions.
 - Business logic lives in `services/`, not in routers or models.
-- Centralize env config in `app/core/config.py` — never scatter `os.getenv()` calls.
+- Centralize env config in `src/core/config.py`, never scatter `os.getenv()` calls.
 - Frontend frame logic lives in one centralized `FrameDefinition` config — capture logic only needs `photoCount`; composition reads the full definition.
 - Never trust a client-supplied user ID — the server always derives the current user from the auth mechanism.
 - Git commits are atomic: one logical change per commit. No "update backend" / "fix stuff".
