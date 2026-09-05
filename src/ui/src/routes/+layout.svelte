@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import '@fontsource-variable/fraunces';
 	import favicon from '$lib/assets/favicon.svg';
 	import { auth } from '$lib/auth/store.svelte';
 
@@ -16,7 +17,10 @@
 </svelte:head>
 
 <header class="nav">
-	<a href="/" class="brand">Chewables</a>
+	<a href="/" class="brand">
+		<span class="sprocket" aria-hidden="true"></span>
+		Chewables
+	</a>
 	<nav>
 		<a href="/photobooth/frame">Photobooth</a>
 		{#if auth.isAuthenticated}
@@ -32,8 +36,17 @@
 
 <style>
 	:global(:focus-visible) {
-		outline: 2px solid #b45309;
+		outline: 2px solid var(--ember);
 		outline-offset: 2px;
+	}
+	:global(html) {
+		--ink: #1c1917;
+		--paper: #faf7f2;
+		--ember: #b45309;
+		--ember-deep: #92400e;
+		--warm-gray: #57534e;
+		--line: #e7e5e4;
+		--wash: #f5f2ec;
 	}
 	@media (prefers-reduced-motion: reduce) {
 		:global(*) {
@@ -49,13 +62,28 @@
 		padding: 0.9rem 1.5rem;
 		max-width: 72rem;
 		margin: 0 auto;
-		font-family: system-ui, sans-serif;
 	}
 	.brand {
-		font-weight: 800;
-		color: #b45309;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		font-family: 'Fraunces Variable', Georgia, serif;
+		font-weight: 750;
+		font-size: 1.3rem;
+		letter-spacing: -0.01em;
+		color: var(--ink);
 		text-decoration: none;
-		font-size: 1.15rem;
+	}
+	.brand:hover {
+		color: var(--ember-deep);
+	}
+	.sprocket {
+		width: 1.1rem;
+		height: 1.1rem;
+		border-radius: 50%;
+		background: radial-gradient(circle, var(--ember) 0 38%, transparent 42%);
+		border: 1px solid var(--ember-deep);
+		box-shadow: inset 0 0 0 2px var(--paper);
 	}
 	nav {
 		display: flex;
@@ -63,23 +91,24 @@
 		align-items: center;
 	}
 	nav a {
-		color: #1c1917;
+		color: var(--ink);
 		text-decoration: none;
 		font-weight: 500;
+		font-size: 0.95rem;
 	}
 	nav a:hover {
-		color: #b45309;
+		color: var(--ember-deep);
 	}
 	.link {
 		background: none;
 		border: none;
-		color: #1c1917;
+		color: var(--ink);
 		font-weight: 500;
 		cursor: pointer;
-		font-size: 1rem;
+		font-size: 0.95rem;
 		font-family: inherit;
 	}
 	.link:hover {
-		color: #b45309;
+		color: var(--ember-deep);
 	}
 </style>
