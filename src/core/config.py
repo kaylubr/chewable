@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     s3_bucket: str = "chewables"
     s3_region: str = "us-east-1"
 
-    auth_secret: str = "dev-only-change-me"
+    auth_secret: str = "dev-only-change-me-0123456789abcdef0123456789abcdef"
     auth_token_expire_minutes: int = 60 * 24 * 7
 
 
