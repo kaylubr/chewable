@@ -31,6 +31,17 @@
 {@render children()}
 
 <style>
+	:global(:focus-visible) {
+		outline: 2px solid #b45309;
+		outline-offset: 2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		:global(*) {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
 	.nav {
 		display: flex;
 		justify-content: space-between;
