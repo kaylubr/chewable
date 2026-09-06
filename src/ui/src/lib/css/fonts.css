@@ -2,3 +2,8 @@
   font-family: "GeistPixel";
   src: url("/fonts/GeistPixel.woff2") format("woff2");
 }
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/Fraunces.woff2") format("woff2");
+}
