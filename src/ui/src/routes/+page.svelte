@@ -216,20 +216,20 @@
 		text-align: center;
 	}
 	.step-no {
-		font-size: 1.2rem;
+		font-size: clamp(0.8rem, 1.4vw, 1.2rem);
 		color: var(--crimson);
 		letter-spacing: 0.12em;
 	}
 	.steps h3 {
 		font-weight: bolder;
-		font-size: 1.5rem;
+		font-size: clamp(1rem, 1.9vw, 1.5rem);
 		margin: 0.5rem 0 0.4rem;
 		color: var(--charcoal);
 	}
 	.steps p {
 		margin: 0;
 		color: var(--ink-soft);
-		font-size: 1.2rem;
+		font-size: clamp(0.82rem, 1.2vw, 1.2rem);
 		font-weight: 700;
 		line-height: 1.55;
 		text-align: center;
