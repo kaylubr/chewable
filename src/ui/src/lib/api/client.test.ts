@@ -73,11 +73,11 @@ describe('api client', () => {
 	it('maps an API error detail into ApiError with its status', async () => {
 		vi.stubGlobal(
 			'fetch',
-			vi.fn(async () => jsonResponse(401, { detail: 'Incorrect email or password' }))
+			vi.fn(async () => jsonResponse(401, { detail: 'Incorrect username or password' }))
 		);
-		await expect(api.login('a@b.com', 'wrong')).rejects.toMatchObject({
+		await expect(api.login('someuser', 'wrong')).rejects.toMatchObject({
 			status: 401,
-			message: 'Incorrect email or password'
+			message: 'Incorrect username or password'
 		});
 	});
 

@@ -2,12 +2,20 @@
 	import { goto } from '$app/navigation';
 	import { api, ApiError } from '$lib/api/client';
 	import { auth } from '$lib/auth/store.svelte';
+	import { oauthAuthorizeUrl } from '$lib/auth/oauth';
 
 	let email = $state('');
+	let username = $state('');
 	let password = $state('');
 	let confirm = $state('');
 	let error = $state<string | null>(null);
 	let submitting = $state(false);
+
+	function nextParam(): string {
+		const params = new URLSearchParams(location.search);
+		const next = params.get('next');
+		return next && next.startsWith('/') ? next : '/photos';
+	}
 
 	async function submit() {
 		error = null;
@@ -21,7 +29,7 @@
 		}
 		submitting = true;
 		try {
-			const res = await api.register(email, password);
+			const res = await api.register(email, username, password);
 			auth.setSession(res.access_token, res.user);
 			goto('/photos');
 		} catch (e) {
@@ -40,7 +48,27 @@
 	<h1>Create an account</h1>
 	<p class="sub">Accounts are only for saving photos to your gallery.</p>
 
+	<div class="social">
+		<a class="social-btn" href={oauthAuthorizeUrl('google', nextParam())}>Continue with Google</a>
+		<a class="social-btn" href={oauthAuthorizeUrl('facebook', nextParam())}>Continue with Facebook</a>
+	</div>
+
+	<div class="divider"><span>or with email</span></div>
+
 	<form onsubmit={(e) => { e.preventDefault(); void submit(); }}>
+		<label>
+			Username
+			<input
+				type="text"
+				bind:value={username}
+				required
+				autocomplete="username"
+				minlength="3"
+				maxlength="32"
+				pattern="[a-z0-9_]+"
+				title="3-32 characters: lowercase letters, digits, underscores"
+			/>
+		</label>
 		<label>
 			Email
 			<input type="email" bind:value={email} required autocomplete="email" />
@@ -81,10 +109,45 @@
 		color: var(--ink-soft);
 		margin-top: -0.5rem;
 	}
+	.social {
+		display: grid;
+		gap: 0.6rem;
+		margin-top: 1.5rem;
+	}
+	.social-btn {
+		display: block;
+		text-align: center;
+		padding: 0.7rem 1rem;
+		border: 1px solid var(--line-strong);
+		border-radius: 0.5rem;
+		background: var(--surface);
+		color: var(--ink);
+		font-weight: 600;
+		text-decoration: none;
+	}
+	.social-btn:hover {
+		border-color: var(--ember);
+		color: var(--ember);
+	}
+	.divider {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin: 1.25rem 0;
+		color: var(--ink-faint);
+		font-size: var(--text-sm);
+	}
+	.divider::before,
+	.divider::after {
+		content: '';
+		flex: 1;
+		height: 1px;
+		background: var(--line);
+	}
 	form {
 		display: grid;
 		gap: 1rem;
-		margin-top: 1.5rem;
+		margin-top: 0;
 	}
 	label {
 		display: grid;

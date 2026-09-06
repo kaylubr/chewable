@@ -10,6 +10,7 @@
 
 	let saving = $state(false);
 	let saveError = $state<string | null>(null);
+	let showSignInPrompt = $state(false);
 
 	function download() {
 		if (!resultUrl) return;
@@ -28,9 +29,8 @@
 	async function save() {
 		saveError = null;
 		if (!auth.isAuthenticated) {
-			// Return to this page after signing in so the user can save again.
-			const next = encodeURIComponent('/photobooth/result');
-			goto(`/login?next=${next}`);
+			// Saving requires an account; warn that leaving loses the in-memory result.
+			showSignInPrompt = true;
 			return;
 		}
 		if (!resultUrl || !frame || !auth.token) return;
@@ -44,6 +44,11 @@
 		} finally {
 			saving = false;
 		}
+	}
+
+	function confirmSignIn() {
+		showSignInPrompt = false;
+		goto('/login?next=/photos');
 	}
 
 	function startOver() {
@@ -85,6 +90,21 @@
 
 	{#if saveError}<p class="save-error" role="alert">{saveError}</p>{/if}
 </main>
+
+{#if showSignInPrompt}
+	<button type="button" class="modal-backdrop" aria-label="Close" onclick={() => (showSignInPrompt = false)}></button>
+	<div class="modal" role="dialog" aria-modal="true" aria-labelledby="signin-title" tabindex="-1">
+		<h2 id="signin-title">Sign in to save</h2>
+		<p>
+			Saving requires an account. This photo lives only in this browser tab — if you
+			leave to sign in, you'll need to take it again to save it.
+		</p>
+		<div class="modal-actions">
+			<button type="button" class="secondary" onclick={() => (showSignInPrompt = false)}>Cancel</button>
+			<button type="button" class="primary" onclick={confirmSignIn}>Sign in to save</button>
+		</div>
+	</div>
+{/if}
 
 <style>
 	.result-page {
@@ -174,5 +194,46 @@
 		.ghost {
 			min-height: 48px;
 		}
+	}
+	.modal-backdrop {
+		position: fixed;
+		inset: 0;
+		background: rgb(0 0 0 / 0.45);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1.5rem;
+		z-index: 40;
+		border: none;
+		cursor: pointer;
+	}
+	.modal {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: var(--surface);
+		color: var(--ink);
+		border-radius: 0.75rem;
+		padding: 1.5rem;
+		max-width: 26rem;
+		width: calc(100% - 3rem);
+		box-shadow: 0 12px 40px rgb(0 0 0 / 0.25);
+		text-align: left;
+		z-index: 41;
+	}
+	.modal h2 {
+		font-size: var(--text-xl);
+		margin-top: 0;
+	}
+	.modal p {
+		color: var(--ink-soft);
+	}
+	.modal-actions {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: flex-end;
+		flex-wrap: wrap;
+		margin-top: 1.25rem;
 	}
 </style>

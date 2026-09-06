@@ -39,8 +39,9 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 }
 
 export interface AuthUser {
-  id: string;
-  email: string;
+	id: string;
+	email: string;
+	username: string;
 }
 
 export interface TokenResponse {
@@ -57,15 +58,15 @@ export interface SavedPhoto {
 }
 
 export const api = {
-  register: (email: string, password: string) =>
+  register: (email: string, username: string, password: string) =>
     request<TokenResponse>("/api/auth/register", {
       method: "POST",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, username, password }),
     }),
-  login: (email: string, password: string) =>
+  login: (username: string, password: string) =>
     request<TokenResponse>("/api/auth/login", {
       method: "POST",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     }),
   me: (token: string) =>
     request<AuthUser>("/api/auth/me", {
