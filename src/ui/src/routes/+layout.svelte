@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import favicon from '$lib/assets/favicon.svg';
 	import { auth } from '$lib/auth/store.svelte';
@@ -10,6 +11,15 @@
 	function closeDrawer() {
 		drawerOpen = false;
 	}
+
+	onMount(() => {
+		const wide = window.matchMedia('(min-width: 761px)');
+		const onWide = (event: MediaQueryListEvent) => {
+			if (event.matches) closeDrawer();
+		};
+		wide.addEventListener('change', onWide);
+		return () => wide.removeEventListener('change', onWide);
+	});
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === 'Escape') closeDrawer();
@@ -68,7 +78,6 @@
 
 <div class="drawer" id="site-drawer" class:open={drawerOpen} aria-hidden={!drawerOpen}>
 	<div class="drawer-header">
-		<span class="drawer-brand">Chewables</span>
 		<button
 			type="button"
 			class="drawer-close"
@@ -334,15 +343,8 @@
 	}
 	.drawer-header {
 		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-bottom: 1.25rem;
-	}
-	.drawer-brand {
-		font-family: var(--font-display);
-		font-weight: 750;
-		font-size: 1.4rem;
-		color: var(--charcoal);
+		justify-content: flex-end;
+		margin-bottom: 0.25rem;
 	}
 	.drawer-close {
 		background: none;
