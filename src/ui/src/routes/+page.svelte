@@ -213,21 +213,21 @@
 		text-align: center;
 	}
 	.step-no {
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
+		font-size: 1.2rem;
 		color: var(--crimson);
 		letter-spacing: 0.12em;
 	}
 	.steps h3 {
-		font-weight: 700;
-		font-size: 1.35rem;
+		font-weight: bolder;
+		font-size: 1.5rem;
 		margin: 0.5rem 0 0.4rem;
 		color: var(--charcoal);
 	}
 	.steps p {
 		margin: 0;
 		color: var(--ink-soft);
-		font-size: 0.98rem;
+		font-size: 1.2rem;
+		font-weight: 700;
 		line-height: 1.55;
 		text-align: center;
 	}
@@ -320,7 +320,7 @@
 		gap: 3rem;
 	}
 	.about-links a {
-		font-family: var(--font-mono);
+		font-family: var(--font-ui);
 		font-size: 0.9rem;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;

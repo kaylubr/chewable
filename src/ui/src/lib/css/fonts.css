@@ -1,9 +1,20 @@
 @font-face {
-  font-family: "GeistPixel";
-  src: url("/fonts/GeistPixel.woff2") format("woff2");
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Fraunces";
-  src: url("/fonts/Fraunces.woff2") format("woff2");
+  font-display: swap;
+  font-family: "Philosopher";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/philosopher.woff2") format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Lustria";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/lustria-v14-latin-regular.woff2") format("woff2");
 }

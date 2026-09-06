@@ -137,8 +137,8 @@
 		--stage-line: #3a3028;
 
 		--font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-		--font-ui: 'GeistPixel', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-		--font-mono: 'GeistPixel', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		--font-ui: 'Philosopher', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+		--font-mono: 'Lustria', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
 		--text-xs: 0.75rem;
 		--text-sm: 0.875rem;
@@ -247,12 +247,12 @@
 	nav a,
 	.link {
 		font-family: var(--font-mono);
-		font-size: 0.78rem;
+		font-size: 0.95rem;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: var(--mustard);
 		text-decoration: none;
-		font-weight: 500;
+		font-weight: bolder;
 		background: none;
 		border: none;
 		padding: 0.5rem 0.2rem;
