@@ -67,6 +67,17 @@
 ></button>
 
 <div class="drawer" id="site-drawer" class:open={drawerOpen} aria-hidden={!drawerOpen}>
+	<div class="drawer-header">
+		<span class="drawer-brand">Chewables</span>
+		<button
+			type="button"
+			class="drawer-close"
+			aria-label="Close menu"
+			onclick={closeDrawer}
+		>
+			<span class="close-icon" aria-hidden="true"></span>
+		</button>
+	</div>
 	<nav class="drawer-nav">
 		<a href="/" onclick={closeDrawer}>Home</a>
 		<a href="/photobooth/frame" onclick={closeDrawer}>Photobooth</a>
@@ -320,6 +331,49 @@
 	}
 	.drawer.open {
 		transform: translateX(0);
+	}
+	.drawer-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1.25rem;
+	}
+	.drawer-brand {
+		font-family: var(--font-display);
+		font-weight: 750;
+		font-size: 1.4rem;
+		color: var(--charcoal);
+	}
+	.drawer-close {
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.5rem;
+		color: var(--charcoal);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.close-icon,
+	.close-icon::before {
+		display: block;
+		width: 1.15rem;
+		height: 2px;
+		background: currentColor;
+		border-radius: 1px;
+	}
+	.close-icon {
+		position: relative;
+		transform: rotate(45deg);
+	}
+	.close-icon::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		transform: rotate(90deg);
+	}
+	.drawer-close:hover {
+		color: var(--crimson);
 	}
 	.drawer-nav {
 		display: flex;
