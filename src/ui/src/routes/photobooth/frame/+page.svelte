@@ -52,7 +52,6 @@
 	{#if error}<p class="error" role="alert">{error}</p>{/if}
 
 	<div class="actions">
-		<a href="/photobooth">Back</a>
 		<button type="button" class="primary" onclick={start}>Use this frame →</button>
 	</div>
 </main>
