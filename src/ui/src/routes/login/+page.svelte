@@ -4,6 +4,7 @@
 	import { api, ApiError } from '$lib/api/client';
 	import { auth } from '$lib/auth/store.svelte';
 	import { oauthAuthorizeUrl } from '$lib/auth/oauth';
+	import OAuthIcon from '$lib/components/OAuthIcon.svelte';
 
 	let username = $state('');
 	let password = $state('');
@@ -52,8 +53,14 @@
 	{/if}
 
 	<div class="social">
-		<a class="social-btn" href={oauthAuthorizeUrl('google', nextParam())}>Continue with Google</a>
-		<a class="social-btn" href={oauthAuthorizeUrl('facebook', nextParam())}>Continue with Facebook</a>
+		<a class="social-btn" href={oauthAuthorizeUrl('google', nextParam())}>
+			<OAuthIcon provider="google" />
+			<span>Continue with Google</span>
+		</a>
+		<a class="social-btn" href={oauthAuthorizeUrl('facebook', nextParam())}>
+			<OAuthIcon provider="facebook" />
+			<span>Continue with Facebook</span>
+		</a>
 	</div>
 
 	<div class="divider"><span>or with email</span></div>
@@ -101,8 +108,10 @@
 		margin-top: 1.5rem;
 	}
 	.social-btn {
-		display: block;
-		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.6rem;
 		padding: 0.7rem 1rem;
 		border: 1px solid var(--line-strong);
 		border-radius: 0.5rem;
