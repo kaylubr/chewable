@@ -13,7 +13,7 @@
 	<section class="hero" aria-labelledby="hero-heading">
 		<div class="hero-inner">
 			<h1 class="marquee" id="hero-heading">
-				Expose your strip
+				Make the moment yours.
 			</h1>
 			<p class="lede">
 				Frame the moments that matter!
@@ -80,52 +80,46 @@
 		background: var(--paper);
 	}
 	.hero {
-		position: relative;
 		background: var(--crimson);
 		color: #fff;
-		overflow: hidden;
 		padding: 1.5rem 1.5rem 0;
 	}
 	.hero-inner {
-		position: relative;
-		z-index: 1;
-		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: 1.5rem;
 		max-width: 72rem;
 		margin: 0 auto;
-		padding: clamp(4rem, 10vw, 7rem) 1.5rem clamp(4rem, 10vw, 7rem);
+		padding: 4rem 1.5rem 4rem;
 		text-align: center;
 	}
 	.marquee {
-		position: relative;
-		z-index: 0;
-		margin: 0;
 		font-family: var(--font-display);
 		font-weight: 800;
-		font-size: clamp(4.5rem, 16vw, 12rem);
+		font-size: clamp(4.5rem, 16vw, 10rem);
 		line-height: 0.95;
 		letter-spacing: -0.03em;
-		color: #fff;
+		color: var(--mustard);
 		text-wrap: balance;
 		user-select: none;
 		max-width: none;
+		margin-bottom: 5rem;
 	}
 	.lede {
-		font-size: 3rem;
+		font-size: clamp(0.9rem, 3.2vw, 2rem);
+		text-align: center;
 		line-height: 1.6;
 		font-weight: bolder;
-		color: rgb(255 255 255 / 0.85);
+		color: #fff;
 		max-width: 36rem;
-		margin: 0;
+		margin: 0 auto;
 		text-align: center;
 	}
 	.cta {
 		display: inline-block;
 		background: transparent;
 		color: var(--mustard);
-		font-family: var(--font-mono);
+		font-family: var(--font-ui);
 		font-weight: 700;
 		font-size: 0.85rem;
 		letter-spacing: 0.06em;
@@ -134,26 +128,11 @@
 		border-radius: 9999px;
 		text-decoration: none;
 		border: solid 2px var(--mustard);
-		box-shadow: 0 4px 0 var(--crimson-deep);
-		margin-top: 1rem;
+		margin-top: 2rem;
 	}
 	.cta:hover {
 		background: var(--mustard-deep);
 		color: var(--charcoal);
-	}
-	.hero::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: -1px;
-		height: 72px;
-		background: var(--paper);
-		border-radius: 0 0 9999px 9999px / 0 0 72px 72px;
-		transform: scaleX(1.6);
-		transform-origin: top center;
-		z-index: 2;
-		pointer-events: none;
 	}
 	.process,
 	.privacy {
