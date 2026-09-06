@@ -247,7 +247,7 @@
 	nav a,
 	.link {
 		font-family: var(--font-mono);
-		font-size: 0.95rem;
+		font-size: clamp(0.68rem, 0.4rem + 0.55vw, 0.95rem);
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: var(--mustard);
