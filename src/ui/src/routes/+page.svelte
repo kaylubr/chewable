@@ -156,14 +156,17 @@
 	}
 	.cta {
 		display: inline-block;
+		box-sizing: border-box;
+		max-width: 100%;
 		background: transparent;
 		color: var(--mustard);
 		font-family: var(--font-ui);
 		font-weight: 700;
-		font-size: 0.85rem;
+		font-size: clamp(0.72rem, 0.5vw + 0.65rem, 0.85rem);
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
-		padding: 1.4rem 2rem;
+		white-space: nowrap;
+		padding: clamp(1.15rem, 1vw + 0.9rem, 1.4rem) clamp(1.3rem, 2.5vw + 0.8rem, 2rem);
 		border-radius: 9999px;
 		text-decoration: none;
 		border: solid 2px var(--mustard);
