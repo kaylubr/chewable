@@ -1,4 +1,6 @@
 <script lang="ts">
+	import AboutIcon from '$lib/components/AboutIcon.svelte';
+
 	const faqs = [
 		{
 			q: "What happens to my photos while I'm in the booth?",
@@ -115,9 +117,24 @@
 					</p>
 				</div>
 				<ul class="about-links">
-					<li><a href="mailto:kbreyes.dev@gmail.com">Contact us</a></li>
-					<li><a href="https://github.com/kaylubr/chewables">GitHub</a></li>
-					<li><a href="/report">Report an issue</a></li>
+					<li>
+						<a href="mailto:kbreyes.dev@gmail.com">
+							<AboutIcon icon="mail" />
+							<span>Contact us</span>
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/kaylubr/chewables">
+							<AboutIcon icon="github" />
+							<span>GitHub</span>
+						</a>
+					</li>
+					<li>
+						<a href="/report">
+							<AboutIcon icon="report" />
+							<span>Report an issue</span>
+						</a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -369,6 +386,9 @@
 		color: var(--mustard);
 		text-decoration: none;
 		white-space: nowrap;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
 	}
 	.about-links a:hover {
 		color: #fff;
