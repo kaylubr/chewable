@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from core.api import auth, photos
+from core.api import auth, oauth, photos
 
 api_router = APIRouter()
 
@@ -11,4 +11,5 @@ async def health() -> dict[str, str]:
 
 
 api_router.include_router(auth.router)
+api_router.include_router(oauth.router)
 api_router.include_router(photos.router)

@@ -20,5 +20,11 @@ class Settings(BaseSettings):
     auth_secret: str = "dev-only-change-me-0123456789abcdef0123456789abcdef"
     auth_token_expire_minutes: int = 60 * 24 * 7
 
+    google_client_id: str = ""
+    google_client_secret: str = ""
+    facebook_client_id: str = ""
+    facebook_client_secret: str = ""
+    oauth_redirect_base: str = "http://localhost:5173"
+
 
 settings = Settings()

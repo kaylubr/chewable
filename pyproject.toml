@@ -19,6 +19,7 @@ dependencies = [
     "pyjwt>=2.10",
     "boto3>=1.35",
     "alembic>=1.14",
+    "authlib>=1.3",
 ]
 
 

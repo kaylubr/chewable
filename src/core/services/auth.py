@@ -61,7 +61,10 @@ async def authenticate_user(
     session: AsyncSession, username: str, password: str
 ) -> User:
     user = await session.scalar(select(User).where(User.username == username))
-    if user is None or not verify_password(password, user.password_hash):
+    # A social-only user has no password_hash and can never pass a password check.
+    if user is None or user.password_hash is None:
+        raise InvalidCredentialsError()
+    if not verify_password(password, user.password_hash):
         raise InvalidCredentialsError()
     return user
 

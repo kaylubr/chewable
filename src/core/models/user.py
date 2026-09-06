@@ -2,8 +2,6 @@
 
 Authentication exists only so a user can permanently save finished photos.
 Guests never touch this table.
-
-Username is the login handle (ADR 0005): unique and immutable for now.
 """
 from __future__ import annotations
 
@@ -18,6 +16,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.db.base import Base
 
 if TYPE_CHECKING:
+    from core.models.oauth_identity import OAuthIdentity
     from core.models.photo import Photo
 
 
@@ -31,11 +30,14 @@ class User(Base):
         String(32), unique=True, index=True, nullable=False
     )
     email: Mapped[str] = mapped_column(String(320), unique=True, index=True, nullable=False)
-    password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    password_hash: Mapped[str | None] = mapped_column(String(255), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         server_default=func.now(), nullable=False
     )
 
     photos: Mapped[list[Photo]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
+    oauth_identities: Mapped[list[OAuthIdentity]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
