@@ -8,6 +8,7 @@ from core.schemas.auth import LoginRequest, RegisterRequest, TokenResponse, User
 from core.services.auth import (
     EmailTakenError,
     InvalidCredentialsError,
+    UsernameTakenError,
     authenticate_user,
     issue_token,
     register_user,
@@ -25,17 +26,22 @@ async def register(req: RegisterRequest, session: AsyncSession = Depends(get_ses
             status_code=status.HTTP_409_CONFLICT,
             detail="An account with that email already exists",
         ) from None
+    except UsernameTakenError:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="That username is already taken",
+        ) from None
     return TokenResponse(access_token=issue_token(user), user=UserOut.model_validate(user))
 
 
 @router.post("/login", response_model=TokenResponse)
 async def login(req: LoginRequest, session: AsyncSession = Depends(get_session)) -> TokenResponse:
     try:
-        user = await authenticate_user(session, req.email, req.password)
+        user = await authenticate_user(session, req.username, req.password)
     except InvalidCredentialsError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect email or password",
+            detail="Incorrect username or password",
         ) from None
     return TokenResponse(access_token=issue_token(user), user=UserOut.model_validate(user))
 

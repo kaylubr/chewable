@@ -21,12 +21,17 @@ class EmailTakenError(Exception):
     pass
 
 
+class UsernameTakenError(Exception):
+    pass
+
+
 class InvalidCredentialsError(Exception):
     pass
 
 
 async def register_user(session: AsyncSession, req: RegisterRequest) -> User:
     user = User(
+        username=req.username,
         email=str(req.email).lower(),
         password_hash=hash_password(req.password),
     )
@@ -35,15 +40,27 @@ async def register_user(session: AsyncSession, req: RegisterRequest) -> User:
         await session.commit()
     except IntegrityError:
         await session.rollback()
-        raise EmailTakenError() from None
+        raise await _conflict_error(session, req) from None
     await session.refresh(user)
     return user
 
 
+async def _conflict_error(
+    session: AsyncSession, req: RegisterRequest
+) -> EmailTakenError | UsernameTakenError:
+    """Distinguish which unique constraint collided after an IntegrityError."""
+    email_taken = await session.scalar(
+        select(User.id).where(User.email == str(req.email).lower())
+    )
+    if email_taken is not None:
+        return EmailTakenError()
+    return UsernameTakenError()
+
+
 async def authenticate_user(
-    session: AsyncSession, email: str, password: str
+    session: AsyncSession, username: str, password: str
 ) -> User:
-    user = await session.scalar(select(User).where(User.email == email.lower()))
+    user = await session.scalar(select(User).where(User.username == username))
     if user is None or not verify_password(password, user.password_hash):
         raise InvalidCredentialsError()
     return user

@@ -14,9 +14,14 @@ from tests.conftest import TestSession
 PNG_HEADER = b"\x89PNG\r\n\x1a\n"
 
 
-async def _register(client: AsyncClient, email: str) -> dict[str, str]:
+async def _register(client: AsyncClient, email: str, username: str | None = None) -> dict[str, str]:
     resp = await client.post(
-        "/api/auth/register", json={"email": email, "password": "password123"}
+        "/api/auth/register",
+        json={
+            "email": email,
+            "password": "password123",
+            "username": username or email.split("@")[0] + "user",
+        },
     )
     assert resp.status_code == 201
     token = resp.json()["access_token"]

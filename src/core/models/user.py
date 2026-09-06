@@ -2,6 +2,8 @@
 
 Authentication exists only so a user can permanently save finished photos.
 Guests never touch this table.
+
+Username is the login handle (ADR 0005): unique and immutable for now.
 """
 from __future__ import annotations
 
@@ -24,6 +26,9 @@ class User(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+    )
+    username: Mapped[str] = mapped_column(
+        String(32), unique=True, index=True, nullable=False
     )
     email: Mapped[str] = mapped_column(String(320), unique=True, index=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
