@@ -3,24 +3,44 @@
 
 	const faqs = [
 		{
-			q: "What happens to my photos while I'm in the booth?",
-			a: 'They stay on your device. The preview, the shots, and the finished photo are all composed in your browser. Nothing is uploaded while you shoot.'
+			q: 'Do I need an account?',
+			a: 'No. You can use the photobooth and download your photos without creating an account. An account is only needed if you want to save your photos online.'
 		},
 		{
-			q: "What's the difference between downloading and saving?",
-			a: 'Downloading puts the finished photo on your device as a file. Saving uploads it into your gallery here, where it is stored so you can come back to it later. Saving is optional. You can take and download photos without ever saving one.'
+			q: 'Are my photos uploaded?',
+			a: "Guest photos stay in your browser while you're using the photobooth. They are only uploaded when you explicitly choose to save a finished photo to your account."
 		},
 		{
-			q: 'Do I need an account to use the photobooth?',
-			a: 'No. You can choose a frame, take photos, and download the result without one. An account only exists if you want a gallery of saved photos, and creating one is entirely up to you.'
+			q: 'Do I need to install anything?',
+			a: 'No. Chewables runs directly in your web browser.'
 		},
 		{
-			q: 'Is it free?',
-			a: 'Yes. No payment, no trial, nothing to buy.'
+			q: 'Why does Chewables need camera access?',
+			a: 'Camera access is required so the browser can take photos from your webcam.'
 		},
 		{
-			q: 'What do I need to use it?',
-			a: 'A phone, tablet, or computer with a camera and a reasonably current browser.'
+			q: 'How many photos does each session take?',
+			a: 'That depends on the frame you choose. Some frames require three photos, while others require four or more.'
+		},
+		{
+			q: 'Can I download my photo without an account?',
+			a: 'Yes. You can download the finished image without signing in.'
+		},
+		{
+			q: 'Can I delete photos I saved?',
+			a: 'Yes. Saved photos can be deleted from your account.'
+		},
+		{
+			q: 'What happens if I refresh or close the page?',
+			a: 'Unsaved photos from your current session may be lost because they are kept in your browser rather than permanently stored.'
+		},
+		{
+			q: 'Are my saved photos private?',
+			a: 'Saved photos are associated with your account and should only be accessible to you.'
+		},
+		{
+			q: 'What browsers are supported?',
+			a: 'Chewables works best in modern browsers that support webcam access and the required browser APIs.'
 		}
 	];
 
