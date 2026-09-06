@@ -65,9 +65,9 @@
 		--stage-ink-soft: #cfc4b8;
 		--stage-line: #3a3028;
 
-		--font-display: 'GeistPixel', 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+		--font-display: 'GeistPixel', Georgia, 'Times New Roman', serif;
 		--font-ui: 'GeistPixel', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-		--font-mono: 'GeistPixel', 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		--font-mono: 'GeistPixel', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
 		--text-xs: 0.75rem;
 		--text-sm: 0.875rem;
