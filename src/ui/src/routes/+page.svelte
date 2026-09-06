@@ -2,7 +2,7 @@
 </script>
 
 <svelte:head>
-	<title>Chewables — Photobooth</title>
+	<title>Chewables</title>
 	<meta
 		name="description"
 		content="Chewables is a privacy-conscious photobooth. Pick a frame, take photos with your camera, and download the result — no account needed."
@@ -10,38 +10,20 @@
 </svelte:head>
 
 <main class="landing">
-	<!-- Crimson hero: red canvas, oversized display type, white action card -->
 	<section class="hero" aria-labelledby="hero-heading">
-		<h1 class="marquee" id="hero-heading">
-			Expose your strip
-		</h1>
-
-		<div class="hero-grid">
-			<div class="hero-copy">
-				<p class="lede">
-					A photobooth that runs entirely in your browser. Pick a frame, take four
-					pictures, and the film is yours. No account, no upload, no waiting.
-				</p>
-				<a class="cta" href="/photobooth/frame">
-					Start the photobooth
-				</a>
-			</div>
-
-			<figure class="action-card" aria-label="The 35mm film frame you can fill with your photos">
-				<div class="card-strip">
-					<img
-						src="/frames/classic.png"
-						alt="A 35mm film strip with four empty frames waiting for your photos"
-						width="260"
-						height="629"
-					/>
-				</div>
-				<figcaption class="rebate">TX 5063 · 4 EXP · DEVELOPED IN-BROWSER</figcaption>
-			</figure>
+		<div class="hero-inner">
+			<h1 class="marquee" id="hero-heading">
+				Expose your strip
+			</h1>
+			<p class="lede">
+				Frame the moments that matter!
+			</p>
+			<a class="cta" href="/photobooth/frame">
+				Start the photobooth
+			</a>
 		</div>
 	</section>
 
-	<!-- White content: three steps -->
 	<section class="process" aria-labelledby="process-heading">
 		<div class="process-inner">
 			<h2 id="process-heading" class="section-title">Three steps, no darkroom</h2>
@@ -65,7 +47,6 @@
 		</div>
 	</section>
 
-	<!-- White content: privacy, honestly stated -->
 	<section class="privacy" aria-labelledby="privacy-heading">
 		<div class="privacy-inner">
 			<h2 id="privacy-heading" class="section-title">What happens to your photos</h2>
@@ -98,7 +79,6 @@
 		color: var(--charcoal);
 		background: var(--paper);
 	}
-	/* === Crimson hero === */
 	.hero {
 		position: relative;
 		background: var(--crimson);
@@ -106,86 +86,60 @@
 		overflow: hidden;
 		padding: 1.5rem 1.5rem 0;
 	}
-	/* Massive semi-obscured display type behind the focal content */
+	.hero-inner {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.5rem;
+		max-width: 72rem;
+		margin: 0 auto;
+		padding: clamp(4rem, 10vw, 7rem) 1.5rem clamp(4rem, 10vw, 7rem);
+		text-align: center;
+	}
 	.marquee {
 		position: relative;
 		z-index: 0;
 		margin: 0;
 		font-family: var(--font-display);
 		font-weight: 800;
-		font-size: clamp(4.5rem, 16vw, 15rem);
-		line-height: 0.82;
+		font-size: clamp(4.5rem, 16vw, 12rem);
+		line-height: 0.95;
 		letter-spacing: -0.03em;
 		color: #fff;
-		white-space: nowrap;
-		opacity: 0.14;
+		text-wrap: balance;
 		user-select: none;
-		transform: translateX(-2%);
 		max-width: none;
-		text-wrap: nowrap;
-	}
-	.hero-grid {
-		position: relative;
-		z-index: 1;
-		display: grid;
-		grid-template-columns: 1fr auto;
-		gap: 4rem;
-		align-items: end;
-		max-width: 72rem;
-		margin: -1.5rem auto 0;
-		padding: 0 1.5rem 4rem;
 	}
 	.lede {
-		font-size: 1.15rem;
+		font-size: 3rem;
 		line-height: 1.6;
+		font-weight: bolder;
 		color: rgb(255 255 255 / 0.85);
 		max-width: 36rem;
-		margin: 0 0 2rem;
+		margin: 0;
+		text-align: center;
 	}
 	.cta {
 		display: inline-block;
-		background: var(--mustard);
-		color: var(--charcoal);
+		background: transparent;
+		color: var(--mustard);
 		font-family: var(--font-mono);
 		font-weight: 700;
 		font-size: 0.85rem;
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
-		padding: 0.95rem 2rem;
+		padding: 1.4rem 2rem;
 		border-radius: 9999px;
 		text-decoration: none;
+		border: solid 2px var(--mustard);
 		box-shadow: 0 4px 0 var(--crimson-deep);
+		margin-top: 1rem;
 	}
 	.cta:hover {
 		background: var(--mustard-deep);
 		color: var(--charcoal);
-	}
-	/* White, sharp-cornered action card on the red canvas */
-	.action-card {
-		margin: 0;
-		background: #fff;
-		border-radius: 0;
-		padding: 1.1rem 1.1rem 0.8rem;
-		box-shadow: 0 24px 50px rgb(0 0 0 / 0.28);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.6rem;
-		width: min(300px, 100%);
-	}
-	.card-strip img {
-		display: block;
-		max-width: 100%;
-		height: auto;
-	}
-	.rebate {
-		font-family: var(--font-mono);
-		font-size: 0.62rem;
-		letter-spacing: 0.12em;
-		color: var(--ink-faint);
-		text-transform: uppercase;
-		text-align: center;
-		overflow-wrap: break-word;
 	}
 	/* Curved divide: concave flow from red into white */
 	.hero::after {
@@ -281,10 +235,6 @@
 	@media (max-width: 780px) {
 		.marquee {
 			font-size: clamp(3.6rem, 18vw, 7rem);
-		}
-		.hero-grid {
-			grid-template-columns: 1fr;
-			gap: 2.5rem;
 		}
 		.steps {
 			grid-template-columns: 1fr;

@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import '@fontsource-variable/fraunces';
-	import '@fontsource-variable/jetbrains-mono';
 	import favicon from '$lib/assets/favicon.svg';
 	import { auth } from '$lib/auth/store.svelte';
-
+	import "$lib/css/fonts.css"
+	
 	let { children } = $props();
 
 	function signOut() {
@@ -20,7 +19,6 @@
 <header class="topbar">
 	<div class="bar-inner">
 		<a href="/" class="brand">
-			<span class="mark" aria-hidden="true"></span>
 			Chewables
 		</a>
 		<nav>
@@ -43,7 +41,6 @@
 		outline-offset: 2px;
 	}
 	:global(html) {
-		/* Palette */
 		--crimson: #c31b1b;
 		--crimson-deep: #9e1212;
 		--mustard: #f5c400;
@@ -56,26 +53,22 @@
 		--line: #e5e5e5;
 		--line-strong: #c9c9c9;
 
-		/* State */
 		--danger: #b3261e;
 		--danger-bg: #fce9e7;
 		--danger-line: #f0c4c0;
 		--success: #1e7d32;
 		--focus: var(--mustard);
 
-		/* Dark stage (camera viewport, deep canvases) */
 		--stage: #14100c;
 		--stage-raise: #221b15;
 		--stage-ink: #f5f1ea;
 		--stage-ink-soft: #cfc4b8;
 		--stage-line: #3a3028;
 
-		/* Type families */
-		--font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
-		--font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-		--font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		--font-display: 'GeistPixel', 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+		--font-ui: 'GeistPixel', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+		--font-mono: 'GeistPixel', 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-		/* Type scale */
 		--text-xs: 0.75rem;
 		--text-sm: 0.875rem;
 		--text-base: 1rem;
@@ -84,8 +77,6 @@
 		--text-2xl: 1.75rem;
 		--text-3xl: 2.25rem;
 
-		/* Compatibility aliases: old role names map onto the new palette so
-		   existing surfaces adopt the brand without per-page churn. */
 		--ink: var(--charcoal);
 		--ember: var(--crimson);
 		--ember-deep: var(--crimson-deep);
@@ -106,6 +97,7 @@
 		line-height: 1.6;
 		color: var(--charcoal);
 		background: var(--paper);
+		margin: 0;
 	}
 	:global(h1, h2, h3) {
 		font-family: var(--font-display);
@@ -144,6 +136,7 @@
 	.topbar {
 		background: var(--crimson);
 		color: #fff;
+		padding: 1.2rem;
 	}
 	.bar-inner {
 		display: flex;
@@ -160,22 +153,13 @@
 		gap: 0.55rem;
 		font-family: var(--font-display);
 		font-weight: 750;
-		font-size: 1.35rem;
+		font-size: 2rem;
 		letter-spacing: -0.01em;
 		color: #fff;
 		text-decoration: none;
 	}
 	.brand:hover {
 		color: #fff;
-	}
-	.mark {
-		width: 1rem;
-		height: 1rem;
-		border-radius: 50%;
-		background: var(--mustard);
-		border: 2px solid #fff;
-		box-shadow: 0 0 0 1px var(--crimson-deep);
-		flex: none;
 	}
 	nav {
 		display: flex;
@@ -188,7 +172,7 @@
 		font-size: 0.78rem;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
-		color: #fff;
+		color: var(--mustard);
 		text-decoration: none;
 		font-weight: 500;
 		background: none;
@@ -199,7 +183,7 @@
 	}
 	nav a:hover,
 	.link:hover {
-		color: var(--mustard);
+		color: #fff;
 	}
 	@media (max-width: 520px) {
 		.bar-inner {
