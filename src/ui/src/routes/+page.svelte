@@ -104,11 +104,22 @@
 	<section class="about" id="about" aria-labelledby="about-heading">
 		<div class="about-inner">
 			<h2 id="about-heading" class="section-title">About</h2>
-			<ul class="about-links">
-				<li><a href="mailto:kbreyes.dev@gmail.com">Contact us</a></li>
-				<li><a href="https://github.com/kaylubr/chewables">GitHub</a></li>
-				<li><a href="/report">Report an issue</a></li>
-			</ul>
+
+			<div class="about-bottom">
+				<div class="about-description">
+					<p>
+						Chewables is a simple photobooth. You pick a frame, take a few
+						photos with your camera, and get a finished picture you can
+						download. If you make an account, you can also save your pictures
+						here and come back to them later.
+					</p>
+				</div>
+				<ul class="about-links">
+					<li><a href="mailto:kbreyes.dev@gmail.com">Contact us</a></li>
+					<li><a href="https://github.com/kaylubr/chewables">GitHub</a></li>
+					<li><a href="/report">Report an issue</a></li>
+				</ul>
+			</div>
 		</div>
 	</section>
 </main>
@@ -177,9 +188,15 @@
 		color: var(--charcoal);
 	}
 	.process,
-	.faq,
-	.about {
+	.faq {
 		background: var(--paper);
+	}
+	.about {
+		background: var(--crimson);
+		color: var(--mustard);
+	}
+	.about .section-title {
+		color: var(--mustard);
 	}
 	.process-inner,
 	.faq-inner,
@@ -189,9 +206,29 @@
 		padding: 4rem 1.5rem;
 		color: var(--crimson);
 	}
-	.faq,
-	.about {
+	.about-inner {
+		color: var(--mustard);
+	}
+	.about-bottom {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+		align-items: start;
+	}
+	.about-description {
+		max-width: 40ch;
+	}
+	.about-description p {
+		margin: 0;
+		color: var(--mustard);
+		font-size: clamp(0.9rem, 0.5rem + 0.6vw, 1.15rem);
+		line-height: 1.6;
+	}
+	.faq {
 		border-top: 1px solid var(--line);
+		scroll-margin-top: 6.5rem;
+	}
+	.about {
 		scroll-margin-top: 6.5rem;
 	}
 	.faq-inner,
@@ -319,20 +356,22 @@
 		margin: 0;
 		padding: 0;
 		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 1.25rem 3rem;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.85rem;
 	}
 	.about-links a {
 		font-family: var(--font-ui);
-		font-size: clamp(0.72rem, 0.4rem + 0.5vw, 0.9rem);
+		font-size: clamp(0.8rem, 0.45rem + 0.5vw, 1rem);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
 		font-weight: 600;
+		color: var(--mustard);
 		text-decoration: none;
 		white-space: nowrap;
 	}
 	.about-links a:hover {
+		color: #fff;
 		text-decoration: underline;
 	}
 	@media (max-width: 780px) {
@@ -340,6 +379,10 @@
 			font-size: clamp(3.6rem, 18vw, 7rem);
 		}
 		.steps {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+		.about-bottom {
 			grid-template-columns: 1fr;
 			gap: 2rem;
 		}
