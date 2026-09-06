@@ -1,11 +1,35 @@
 <script lang="ts">
+	const faqs = [
+		{
+			q: "What happens to my photos while I'm in the booth?",
+			a: 'They stay on your device. The preview, the shots, and the finished photo are all composed in your browser. Nothing is uploaded while you shoot.'
+		},
+		{
+			q: "What's the difference between downloading and saving?",
+			a: 'Downloading puts the finished photo on your device as a file. Saving uploads it into your gallery here, where it is stored so you can come back to it later. Saving is optional. You can take and download photos without ever saving one.'
+		},
+		{
+			q: 'Do I need an account to use the photobooth?',
+			a: 'No. You can choose a frame, take photos, and download the result without one. An account only exists if you want a gallery of saved photos, and creating one is entirely up to you.'
+		},
+		{
+			q: 'Is it free?',
+			a: 'Yes. No payment, no trial, nothing to buy.'
+		},
+		{
+			q: 'What do I need to use it?',
+			a: 'A phone, tablet, or computer with a camera and a reasonably current browser.'
+		}
+	];
+
+	let openFaq = $state(-1);
 </script>
 
 <svelte:head>
 	<title>Chewables</title>
 	<meta
 		name="description"
-		content="Chewables is a privacy-conscious photobooth. Pick a frame, take photos with your camera, and download the result — no account needed."
+		content="Chewables is a privacy-conscious photobooth. Pick a frame, take photos with your camera, and download the result. Accounts are optional for saving photos to a gallery."
 	/>
 </svelte:head>
 
@@ -26,49 +50,65 @@
 
 	<section class="process" aria-labelledby="process-heading">
 		<div class="process-inner">
-			<h2 id="process-heading" class="section-title">Three steps, no darkroom</h2>
+			<h2 id="process-heading" class="section-title">How it works</h2>
 			<ol class="steps">
 				<li>
 					<span class="step-no">01</span>
-					<h3>Pick your stock</h3>
-					<p>Choose a frame. Each one needs a set number of shots.</p>
+					<h3>Choose a frame</h3>
+					<p>Each frame needs a set number of photos.</p>
 				</li>
 				<li>
 					<span class="step-no">02</span>
-					<h3>Take the shots</h3>
-					<p>The camera counts you down between each exposure.</p>
+					<h3>Take the photos</h3>
+					<p>The camera counts you down between each shot.</p>
 				</li>
 				<li>
 					<span class="step-no">03</span>
-					<h3>Keep the strip</h3>
-					<p>Download your finished film. Save it to your gallery only if you want.</p>
+					<h3>Download it</h3>
+					<p>Your finished photo is composed in your browser. Download it, or save it to your gallery if you want to keep it.</p>
 				</li>
 			</ol>
 		</div>
 	</section>
 
-	<section class="privacy" aria-labelledby="privacy-heading">
-		<div class="privacy-inner">
-			<h2 id="privacy-heading" class="section-title">What happens to your photos</h2>
-			<ul>
-				<li>
-					<strong>Guests stay off the record.</strong> Your captures and the finished
-					strip are composed in your browser. Nothing is uploaded while you shoot.
-				</li>
-				<li>
-					<strong>The booth never makes an account for you.</strong> You can shoot and
-					download as a guest, full stop.
-				</li>
-				<li>
-					<strong>Saving is the only upload.</strong> If you choose to keep a photo in
-					your gallery, that is the one moment it leaves your device.
-				</li>
+	<section class="faq" id="faq" aria-labelledby="faq-heading">
+		<div class="faq-inner">
+			<h2 id="faq-heading" class="section-title">FAQs</h2>
+			<div class="accordion">
+				{#each faqs as faq, i}
+					<div class="faq-item" class:open={openFaq === i}>
+						<h3>
+							<button
+								type="button"
+								class="faq-question"
+								id="faq-button-{i}"
+								aria-expanded={openFaq === i}
+								aria-controls="faq-panel-{i}"
+								onclick={() => (openFaq = openFaq === i ? -1 : i)}
+							>
+								<span>{faq.q}</span>
+								<span class="faq-icon" aria-hidden="true"></span>
+							</button>
+						</h3>
+						<div class="faq-panel" id="faq-panel-{i}" role="region" aria-labelledby="faq-button-{i}">
+							<div class="faq-panel-inner">
+								<p>{faq.a}</p>
+							</div>
+						</div>
+					</div>
+				{/each}
+			</div>
+		</div>
+	</section>
+
+	<section class="about" id="about" aria-labelledby="about-heading">
+		<div class="about-inner">
+			<h2 id="about-heading" class="section-title">About</h2>
+			<ul class="about-links">
+				<li><a href="mailto:kbreyes.dev@gmail.com">Contact us</a></li>
+				<li><a href="https://github.com/kaylubr/chewables">GitHub</a></li>
+				<li><a href="/report">Report an issue</a></li>
 			</ul>
-			<p class="privacy-note">
-				Saved photos travel over an encrypted connection and are stored securely, but
-				they are not client-side encrypted. We can technically access what you choose
-				to save. Guest photos never reach us at all.
-			</p>
 		</div>
 	</section>
 </main>
@@ -82,7 +122,7 @@
 	.hero {
 		background: var(--crimson);
 		color: #fff;
-		padding: 1.5rem 1.5rem 0;
+		padding: 2rem;
 	}
 	.hero-inner {
 		flex-direction: column;
@@ -113,7 +153,6 @@
 		color: #fff;
 		max-width: 36rem;
 		margin: 0 auto;
-		text-align: center;
 	}
 	.cta {
 		display: inline-block;
@@ -135,14 +174,26 @@
 		color: var(--charcoal);
 	}
 	.process,
-	.privacy {
+	.faq,
+	.about {
 		background: var(--paper);
 	}
 	.process-inner,
-	.privacy-inner {
+	.faq-inner,
+	.about-inner {
 		max-width: 72rem;
 		margin: 0 auto;
 		padding: 4rem 1.5rem;
+		color: var(--crimson);
+	}
+	.faq,
+	.about {
+		border-top: 1px solid var(--line);
+		scroll-margin-top: 6.5rem;
+	}
+	.faq-inner,
+	.about-inner {
+		max-width: 56rem;
 	}
 	.section-title {
 		font-weight: 700;
@@ -150,6 +201,7 @@
 		letter-spacing: -0.01em;
 		margin: 0 0 2.5rem;
 		color: var(--charcoal);
+		text-align: center;
 	}
 	.steps {
 		list-style: none;
@@ -158,6 +210,7 @@
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 2.5rem;
+		text-align: center;
 	}
 	.step-no {
 		font-family: var(--font-mono);
@@ -176,38 +229,106 @@
 		color: var(--ink-soft);
 		font-size: 0.98rem;
 		line-height: 1.55;
-		max-width: 30ch;
+		text-align: center;
 	}
-	.privacy {
-		border-top: 1px solid var(--line);
-	}
-	.privacy ul {
-		margin: 0 0 1.5rem;
-		padding: 0;
-		list-style: none;
+	.accordion {
 		display: grid;
-		gap: 1rem;
+		gap: 0.75rem;
 	}
-	.privacy li {
-		padding: 1.1rem 1.3rem;
+	.faq-item {
 		background: var(--surface);
 		border: 1px solid var(--line);
-		border-radius: 0;
-		line-height: 1.5;
-		color: var(--ink-soft);
-		box-shadow: 0 1px 3px rgb(0 0 0 / 0.05);
+		border-radius: 0.5rem;
 	}
-	.privacy li strong {
+	.faq-question {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1.1rem 1.3rem;
+		background: none;
+		border: none;
+		font-family: var(--font-ui);
+		font-size: 1.05rem;
+		font-weight: 700;
+		text-align: left;
 		color: var(--charcoal);
+		cursor: pointer;
+		border-radius: 0.5rem;
 	}
-	.privacy-note {
-		font-size: 0.9rem;
-		color: var(--ink-soft);
-		border-top: 1px solid var(--line);
-		padding-top: 1.25rem;
+	.faq-question:hover {
+		color: var(--crimson);
+	}
+	.faq-icon {
+		position: relative;
+		width: 1rem;
+		height: 1rem;
+		flex: none;
+		color: var(--crimson);
+	}
+	.faq-icon::before,
+	.faq-icon::after {
+		content: '';
+		position: absolute;
+		background: currentColor;
+		border-radius: 1px;
+		transition: transform 0.2s ease;
+	}
+	.faq-icon::before {
+		left: 0;
+		right: 0;
+		top: 50%;
+		height: 2px;
+		transform: translateY(-50%);
+	}
+	.faq-icon::after {
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		width: 2px;
+		transform: translateX(-50%);
+	}
+	.faq-item.open .faq-icon::after {
+		transform: translateX(-50%) scaleY(0);
+	}
+	.faq-panel {
+		display: grid;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 0.28s ease;
+	}
+	.faq-item.open .faq-panel {
+		grid-template-rows: 1fr;
+	}
+	.faq-panel-inner {
+		overflow: hidden;
+	}
+	.faq-panel p {
 		margin: 0;
-		max-width: 56ch;
+		padding: 0 1.3rem 1.2rem;
+		color: var(--ink-soft);
+		font-size: 0.98rem;
 		line-height: 1.6;
+		max-width: 60ch;
+	}
+	.about-links {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		gap: 3rem;
+	}
+	.about-links a {
+		font-family: var(--font-mono);
+		font-size: 0.9rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		font-weight: 600;
+		text-decoration: none;
+	}
+	.about-links a:hover {
+		text-decoration: underline;
 	}
 	@media (max-width: 780px) {
 		.marquee {

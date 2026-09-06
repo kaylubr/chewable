@@ -5,8 +5,18 @@
 	import "$lib/css/fonts.css"
 	
 	let { children } = $props();
+	let drawerOpen = $state(false);
+
+	function closeDrawer() {
+		drawerOpen = false;
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape') closeDrawer();
+	}
 
 	function signOut() {
+		closeDrawer();
 		auth.clear();
 		goto('/');
 	}
@@ -21,19 +31,59 @@
 		<a href="/" class="brand">
 			Chewables
 		</a>
-		<nav>
-			<a href="/photobooth/frame">Photobooth</a>
-			{#if auth.isAuthenticated}
-				<a href="/photos">My photos</a>
-				<button type="button" class="link" onclick={signOut}>Sign out</button>
-			{:else}
-				<a href="/login">Sign in</a>
-			{/if}
-		</nav>
+		<div class="bar-right">
+			<nav>
+				<a href="/photobooth/frame">Photobooth</a>
+				<a href="/#faq">FAQ</a>
+				<a href="/#about">About</a>
+				{#if auth.isAuthenticated}
+					<a href="/photos">My photos</a>
+					<button type="button" class="link" onclick={signOut}>Sign out</button>
+				{:else}
+					<a href="/login">Sign in</a>
+				{/if}
+			</nav>
+			<button
+				type="button"
+				class="menu-toggle"
+				aria-expanded={drawerOpen}
+				aria-controls="site-drawer"
+				aria-label="Menu"
+				onclick={() => (drawerOpen = !drawerOpen)}
+			>
+				<span class="menu-icon" aria-hidden="true"></span>
+			</button>
+		</div>
 	</div>
 </header>
 
+<button
+	type="button"
+	class="scrim"
+	class:open={drawerOpen}
+	aria-label="Close menu"
+	tabindex={drawerOpen ? 0 : -1}
+	onclick={closeDrawer}
+></button>
+
+<div class="drawer" id="site-drawer" class:open={drawerOpen} aria-hidden={!drawerOpen}>
+	<nav class="drawer-nav">
+		<a href="/" onclick={closeDrawer}>Home</a>
+		<a href="/photobooth/frame" onclick={closeDrawer}>Photobooth</a>
+		<a href="/#faq" onclick={closeDrawer}>FAQ</a>
+		<a href="/#about" onclick={closeDrawer}>About</a>
+		{#if auth.isAuthenticated}
+			<a href="/photos" onclick={closeDrawer}>My photos</a>
+			<button type="button" class="link" onclick={signOut}>Sign out</button>
+		{:else}
+			<a href="/login" onclick={closeDrawer}>Sign in</a>
+		{/if}
+	</nav>
+</div>
+
 {@render children()}
+
+<svelte:window onkeydown={handleKeydown} />
 
 <style>
 	:global(:focus-visible) {
@@ -47,6 +97,7 @@
 		--mustard-deep: #d9ad00;
 		--paper: #fafafa;
 		--surface: #ffffff;
+		--surface-2: #f4f4f4;
 		--charcoal: #1a1a1a;
 		--ink-soft: #444444;
 		--ink-faint: #8a8a8a;
@@ -146,6 +197,11 @@
 		max-width: 76rem;
 		margin: 0 auto;
 	}
+	.bar-right {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
 	.brand {
 		display: inline-flex;
 		align-items: center;
@@ -184,20 +240,122 @@
 	.link:hover {
 		color: #fff;
 	}
-	@media (max-width: 520px) {
+	.menu-toggle {
+		display: none;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.6rem;
+		align-items: center;
+		justify-content: center;
+		color: #fff;
+	}
+	.menu-icon,
+	.menu-icon::before,
+	.menu-icon::after {
+		display: block;
+		width: 1.4rem;
+		height: 2px;
+		background: currentColor;
+		border-radius: 1px;
+	}
+	.menu-icon {
+		position: relative;
+	}
+	.menu-icon::before,
+	.menu-icon::after {
+		content: '';
+		position: absolute;
+		left: 0;
+	}
+	.menu-icon::before {
+		top: -0.42rem;
+	}
+	.menu-icon::after {
+		top: 0.42rem;
+	}
+	.menu-toggle[aria-expanded='true'] .menu-icon {
+		background: transparent;
+	}
+	.menu-toggle[aria-expanded='true'] .menu-icon::before {
+		top: 0;
+		transform: rotate(45deg);
+	}
+	.menu-toggle[aria-expanded='true'] .menu-icon::after {
+		top: 0;
+		transform: rotate(-45deg);
+	}
+	.scrim {
+		position: fixed;
+		inset: 0;
+		background: rgb(0 0 0 / 0.45);
+		border: none;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.2s ease;
+		z-index: 40;
+	}
+	.scrim.open {
+		opacity: 1;
+		pointer-events: auto;
+	}
+	.drawer {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: min(19rem, 85vw);
+		background: var(--surface);
+		box-shadow: -12px 0 32px rgb(0 0 0 / 0.2);
+		transform: translateX(100%);
+		transition: transform 0.25s ease;
+		z-index: 50;
+		padding: calc(1.2rem + env(safe-area-inset-top)) 1.5rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
+	}
+	.drawer.open {
+		transform: translateX(0);
+	}
+	.drawer-nav {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.25rem;
+	}
+	.drawer-nav a,
+	.drawer-nav .link {
+		font-family: var(--font-mono);
+		font-size: 0.95rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--charcoal);
+		text-decoration: none;
+		padding: 0.9rem 0.4rem;
+		border-radius: 0.4rem;
+		border: none;
+		background: none;
+		text-align: left;
+		cursor: pointer;
+	}
+	.drawer-nav a:hover,
+	.drawer-nav .link:hover {
+		color: var(--crimson);
+		background: var(--surface-2);
+	}
+	@media (max-width: 760px) {
+		nav {
+			display: none;
+		}
+		.menu-toggle {
+			display: inline-flex;
+		}
 		.bar-inner {
 			padding-inline: 1rem;
 		}
 		.brand {
 			font-size: 1.2rem;
-		}
-		nav {
-			gap: 0.9rem;
-		}
-		nav a,
-		.link {
-			font-size: 0.7rem;
-			letter-spacing: 0.05em;
 		}
 	}
 	@media (pointer: coarse) {
