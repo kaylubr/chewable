@@ -184,6 +184,9 @@
 		}
 	}
 	.topbar {
+		position: sticky;
+		top: 0;
+		z-index: 30;
 		background: var(--crimson);
 		color: #fff;
 		padding: 1.2rem;
