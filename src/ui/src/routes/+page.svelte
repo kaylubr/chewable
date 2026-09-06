@@ -319,16 +319,18 @@
 		margin: 0;
 		padding: 0;
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: center;
-		gap: 3rem;
+		gap: 1.25rem 3rem;
 	}
 	.about-links a {
 		font-family: var(--font-ui);
-		font-size: 0.9rem;
+		font-size: clamp(0.72rem, 0.4rem + 0.5vw, 0.9rem);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
 		font-weight: 600;
 		text-decoration: none;
+		white-space: nowrap;
 	}
 	.about-links a:hover {
 		text-decoration: underline;
