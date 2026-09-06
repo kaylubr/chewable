@@ -192,8 +192,6 @@
 	.secondary:hover {
 		background: var(--ink);
 	}
-	/* Phone: two columns of portrait cards read as a film contact sheet;
-	   the delete control gets a real touch target. */
 	@media (max-width: 560px) {
 		.grid {
 			grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));

@@ -369,7 +369,6 @@
 		border-color: var(--ink-faint);
 		color: var(--ink);
 	}
-	/* Narrow phones: give the camera the screen, scale the countdown down. */
 	@media (max-width: 560px) {
 		.camera-page {
 			padding-inline: 0;
@@ -392,7 +391,6 @@
 			padding: 1rem 2.4rem;
 		}
 	}
-	/* Touch: bigger targets, primary actions thumb-reachable. */
 	@media (pointer: coarse) {
 		.primary,
 		.ghost,
@@ -408,7 +406,6 @@
 			height: 0.85rem;
 		}
 	}
-	/* Add breathing room above the bottom-safe-area for the action row. */
 	.actions {
 		padding-bottom: env(safe-area-inset-bottom);
 	}

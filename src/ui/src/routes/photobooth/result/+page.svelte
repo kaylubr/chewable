@@ -156,7 +156,6 @@
 		margin-top: 1rem;
 		font-size: var(--text-sm);
 	}
-	/* Phone: stack the actions full-width under the photo. */
 	@media (max-width: 480px) {
 		.actions {
 			flex-direction: column;
@@ -169,7 +168,6 @@
 			padding-block: 0.85rem;
 		}
 	}
-	/* Touch: keep the save/download targets thumb-sized. */
 	@media (pointer: coarse) {
 		.primary,
 		.secondary,

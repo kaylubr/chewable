@@ -132,7 +132,6 @@
 			transition-duration: 0.01ms !important;
 		}
 	}
-	/* Crimson top bar */
 	.topbar {
 		background: var(--crimson);
 		color: #fff;

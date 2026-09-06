@@ -141,7 +141,6 @@
 		background: var(--mustard-deep);
 		color: var(--charcoal);
 	}
-	/* Curved divide: concave flow from red into white */
 	.hero::after {
 		content: '';
 		position: absolute;
@@ -156,7 +155,6 @@
 		z-index: 2;
 		pointer-events: none;
 	}
-	/* === White content sections === */
 	.process,
 	.privacy {
 		background: var(--paper);

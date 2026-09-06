@@ -130,8 +130,6 @@
 		font-weight: 600;
 		cursor: pointer;
 	}
-	/* Narrow phones: one frame per row, image height capped so the tall
-	   film strip does not dominate the card. */
 	@media (max-width: 480px) {
 		.grid {
 			grid-template-columns: 1fr;
@@ -158,7 +156,6 @@
 			flex-wrap: wrap;
 		}
 	}
-	/* Touch: whole card is already the target; give actions height. */
 	@media (pointer: coarse) {
 		.primary {
 			min-height: 48px;
